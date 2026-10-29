@@ -1,5 +1,13 @@
 # OmniChat — Full-Stack AI Chat Assistant 💬
 
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-Vercel-success?style=for-the-badge&logo=vercel)](https://ai-chat-assistant-gold.vercel.app)
+[![GitHub Repo](https://img.shields.io/badge/GitHub-Repository-blue?style=for-the-badge&logo=github)](https://github.com/piyushraj3263-dot/ai-chat-assistant)
+
+🔗 **Live Deployment:** [https://ai-chat-assistant-gold.vercel.app](https://ai-chat-assistant-gold.vercel.app)  
+👤 **Author:** [Piyush Raj](https://github.com/piyushraj3263-dot) (2nd Year B.Tech CSE)
+
+---
+
 Hey there! 👋 I'm **Piyush Raj**, a 2nd-year Computer Science & Engineering student. 
 
 I built **OmniChat** to get hands-on experience with how modern web applications integrate with Large Language Model (LLM) APIs. Rather than just using ChatGPT or Claude through a browser, I wanted to understand what actually happens behind the scenes: how HTTP requests are structured, how backend servers securely proxy API keys, and how multi-turn conversation memory is maintained in the client.
