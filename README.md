@@ -47,11 +47,12 @@ To fix this, I built a lightweight **Express.js backend** that acts as a secure 
 
 ## 🚀 Features
 
-- **Multi-Turn Memory:** Retains conversation context so the assistant remembers past questions during a session.
-- **Code Formatting:** Automatically detects and formats code blocks and backticks for readable syntax.
-- **Dark-Themed UI:** Custom CSS layout with quick-start prompt shortcuts for CS topics (Big-O, interview prep, API concepts).
-- **Responsive Design:** Includes mobile sidebar toggle and auto-expanding input field.
-- **Environment-based Config:** Separates secrets from code using `.env`.
+- 🗣️ **Multilingual & Hinglish Support:** Understands and answers technical CS queries in English, Hindi, and natural Hinglish (e.g. *"bhai REST API samjha do"*).
+- 💬 **Multi-Turn Memory:** Retains conversation context so the assistant remembers past questions during a session.
+- ⚡ **Real-Time Code Formatting:** Automatically detects and formats code blocks and backticks for readable syntax.
+- 🎨 **Dark-Themed Workspace UI:** Custom CSS layout with quick-start prompt shortcuts for CS topics (Big-O, interview prep, API concepts).
+- 📱 **Responsive Design:** Includes mobile sidebar toggle and auto-expanding input field.
+- 🔒 **Secure Backend Proxy:** Separates sensitive API keys from the browser using Node.js and `.env`.
 
 ---
 
