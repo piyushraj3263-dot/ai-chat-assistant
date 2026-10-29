@@ -101,9 +101,13 @@ app.post('/api/chat', async (req, res) => {
 // ==============================================================================
 // 🚀 Start the Server
 // ==============================================================================
-app.listen(PORT, () => {
-  console.log(`\n======================================================`);
-  console.log(`🚀 AI Chat Assistant is running!`);
-  console.log(`🌐 Open in your browser: http://localhost:${PORT}`);
-  console.log(`======================================================\n`);
-});
+if (process.env.NODE_ENV !== 'production' || !process.env.VERCEL) {
+  app.listen(PORT, () => {
+    console.log(`\n======================================================`);
+    console.log(`🚀 AI Chat Assistant is running!`);
+    console.log(`🌐 Open in your browser: http://localhost:${PORT}`);
+    console.log(`======================================================\n`);
+  });
+}
+
+module.exports = app;
