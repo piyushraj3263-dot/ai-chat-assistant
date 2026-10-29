@@ -14,6 +14,6 @@
     "express": "^4.19.2"
   },
   "keywords": ["ai", "chatbot", "claude", "anthropic"],
-  "author": "Your Name",
+  "author": "Piyush Raj",
   "license": "MIT"
 }

@@ -1,105 +1,105 @@
-# 🤖 OmniChat AI - Full-Stack AI Chat Assistant
+# OmniChat — Full-Stack AI Chat Assistant 💬
 
-[![Node.js](https://img.shields.io/badge/Node.js-v20+-green.svg)](https://nodejs.org/)
-[![Anthropic Claude](https://img.shields.io/badge/AI-Claude%203.5-blueviolet.svg)](https://anthropic.com)
-[![Express](https://img.shields.io/badge/Backend-Express.js-black.svg)](https://expressjs.com/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+Hey there! 👋 I'm **Piyush Raj**, a 2nd-year Computer Science & Engineering student. 
 
-> A modern, full-stack AI conversational assistant built with **Node.js**, **Express**, and the **Anthropic Claude API**. Designed with a clean, dark-themed responsive UI, multi-turn conversation memory, and secure backend API handling.
+I built **OmniChat** to get hands-on experience with how modern web applications integrate with Large Language Model (LLM) APIs. Rather than just using ChatGPT or Claude through a browser, I wanted to understand what actually happens behind the scenes: how HTTP requests are structured, how backend servers securely proxy API keys, and how multi-turn conversation memory is maintained in the client.
 
 ---
 
-## 📌 Architecture Overview
+## 💡 Why I Built This
 
-How does this app communicate with AI?
+Earlier, I created a **CGPA Management System** to practice core data handling and logic. For my next project, I wanted to challenge myself by building a full-stack project involving:
+1. **Third-party API Integration:** Connecting a Node.js backend to the Anthropic Claude API.
+2. **Security Best Practices:** Ensuring secret keys are never exposed in client-side code by using environment variables (`dotenv`) and proper `.gitignore` rules.
+3. **Asynchronous JavaScript:** Handling `async/await`, `fetch()` calls, and dynamic DOM updates without page reloads.
+4. **Clean UI/UX:** Designing a responsive, dark-mode interface with code snippet formatting and typing animations.
+
+---
+
+## 🛠️ How It Works (Architecture)
 
 ```text
-┌──────────────────────┐              ┌──────────────────────┐              ┌──────────────────────┐
-│                      │              │                      │              │                      │
-│   Browser (Frontend) │  HTTP POST   │  Node.js + Express   │  HTTPS POST  │   Anthropic Claude   │
-│  HTML / CSS / JS     ├─────────────►│  Backend Server      ├─────────────►│   Cloud API Servers  │
-│                      │  /api/chat   │  (Keeps Key Safe)    │              │                      │
-│                      │◄─────────────┤                      │◄─────────────┤                      │
-└──────────────────────┘  JSON Reply  └──────────────────────┘  AI Tokens   └──────────────────────┘
+Browser (Client)               Backend Server                 Anthropic Claude API
+┌──────────────────┐           ┌──────────────────┐           ┌────────────────────┐
+│ User types prompt│           │ Express Server   │           │ Cloud LLM Engine   │
+│ & views messages ├──────────►│ (server.js)      ├──────────►│                    │
+│                  │ POST JSON │ Attaches private │ HTTPS Req │ Processes context  │
+│                  │ /api/chat │ API key securely │ with body │ & returns reply    │
+│                  │◄──────────┤                  │◄──────────┤                    │
+└──────────────────┘ Returns   └──────────────────┘ Receives  └────────────────────┘
+                     AI reply                       tokens
 ```
 
-### Why a Backend Server is Necessary:
-1. **Security (Secret Keys):** If you call the AI API directly from the browser, anyone can open DevTools and steal your paid API key. The backend hides the key securely in an environment variable (`.env`).
-2. **CORS Prevention:** Browser cross-origin policies restrict direct client-to-API calls.
-3. **Data Sanitization & Rate Limiting:** The backend validates incoming requests before forwarding them to the LLM.
+### The Key Lesson I Learned:
+In my first draft, I thought about calling the API directly from the browser's JavaScript. But I quickly realized that anyone could open DevTools (`F12`), look at network requests or source code, and steal the API key! 
+
+To fix this, I built a lightweight **Express.js backend** that acts as a secure intermediary (proxy). The browser only talks to `/api/chat`, and my server handles the sensitive API authentication.
 
 ---
 
-## ✨ Features
+## 🚀 Features
 
-- 💬 **Multi-Turn Context Memory:** Retains past messages in the conversation session so the AI remembers what you previously discussed.
-- 🎨 **Modern Dark UI:** Glassmorphism aesthetics, responsive sidebar, Lucide icons, and fluid animations.
-- ⚡ **Lightweight Markdown & Code Styling:** Automatically renders code snippets with monospace formatting.
-- 💡 **Quick Prompts:** One-click shortcuts for Computer Science interview prep, algorithm explanations, and API tutorials.
-- 🔒 **Safe Key Management:** Uses `dotenv` and `.gitignore` to guarantee API keys are never leaked to public version control.
+- **Multi-Turn Memory:** Retains conversation context so the assistant remembers past questions during a session.
+- **Code Formatting:** Automatically detects and formats code blocks and backticks for readable syntax.
+- **Dark-Themed UI:** Custom CSS layout with quick-start prompt shortcuts for CS topics (Big-O, interview prep, API concepts).
+- **Responsive Design:** Includes mobile sidebar toggle and auto-expanding input field.
+- **Environment-based Config:** Separates secrets from code using `.env`.
 
 ---
 
-## 🛠️ Tech Stack
+## 🧰 Tech Stack
 
-- **Frontend:** Vanilla HTML5, CSS3, JavaScript (ES6+), [Lucide Icons](https://lucide.dev)
+- **Frontend:** HTML5, CSS3, Vanilla JavaScript (ES6+), Lucide Icons
 - **Backend:** Node.js, Express.js, CORS
-- **AI Integration:** `@anthropic-ai/sdk` (Claude 3.5 Haiku / Sonnet)
-- **Environment Management:** `dotenv`
+- **AI Integration:** `@anthropic-ai/sdk` (Claude API)
+- **Tools:** Git, GitHub, npm
 
 ---
 
-## 🚀 Quickstart Guide
+## 💻 Running Locally
 
-### 1. Prerequisites
-- [Node.js](https://nodejs.org/) (v18 or higher)
-- An Anthropic Claude API Key (Get one free at [console.anthropic.com](https://console.anthropic.com))
+If you want to run this project on your own machine:
 
-### 2. Clone the Repository
+### 1. Clone the repo
 ```bash
-git clone https://github.com/your-username/ai-chat-assistant.git
+git clone https://github.com/piyushraj3263-dot/ai-chat-assistant.git
 cd ai-chat-assistant
 ```
 
-### 3. Install Dependencies
+### 2. Install dependencies
 ```bash
 npm install
 ```
 
-### 4. Configure Environment Variables
-Create a `.env` file in the project root:
+### 3. Set up your API key
+Create a `.env` file in the root folder:
 ```env
-ANTHROPIC_API_KEY=your_actual_anthropic_api_key_here
+ANTHROPIC_API_KEY=your_claude_api_key_here
 PORT=3000
 ```
+*(Get a key from [console.anthropic.com](https://console.anthropic.com))*
 
-### 5. Run the Application
+### 4. Start the server
 ```bash
 npm start
 ```
-Open **[http://localhost:3000](http://localhost:3000)** in your browser!
+Then open [http://localhost:3000](http://localhost:3000) in your browser!
 
 ---
 
-## 📄 Resume Bullet Points (Copy & Paste Ready)
+## 📚 What I Learned Building This Project
 
-Add this project to your resume under **Projects**:
-
-> **OmniChat AI — Full-Stack AI Chat Assistant** | *Node.js, Express, Claude API, HTML5/CSS3, JavaScript*
-> - Engineered an interactive AI chat assistant using the **Anthropic Claude API**, featuring multi-turn conversation memory and contextual prompt chaining.
-> - Built a secure **Node.js/Express** backend proxy preventing client-side API key exposure and managing CORS and rate limiting.
-> - Developed a responsive, dark-mode user interface with lightweight real-time markdown formatting and animated typing states.
+1. **Client-Server Separation:** How frontend `fetch()` communicates with backend Express routes using JSON bodies.
+2. **LLM Mechanics:** What system prompts are, how token limits (`max_tokens`) work, and how conversation arrays (`role: 'user'` / `role: 'assistant'`) maintain context.
+3. **API Security:** The importance of `.env` files and keeping production secrets out of public GitHub repositories.
+4. **Git Workflow:** Managing branches, clean commit messages, and deployment setup for cloud hosting.
 
 ---
 
-## 🧠 Key Computer Science Concepts Demonstrated
+## 👤 Author
 
-1. **REST APIs & HTTP Protocol:** Request methods (`POST`), headers (`Content-Type`, `Authorization`), and JSON payloads.
-2. **Tokens & Context Windows:** How LLMs consume input tokens and produce completion tokens under defined budget limits (`max_tokens`).
-3. **Asynchronous JavaScript:** Managing promises and `async/await` for smooth UI rendering without freezing the main thread.
-4. **Environment Isolation:** Keeping production credentials separate from source code using 12-factor app principles.
+**Piyush Raj**
+- GitHub: [@piyushraj3263-dot](https://github.com/piyushraj3263-dot)
+- Education: B.Tech in Computer Science & Engineering (2nd Year)
 
----
-
-## 📜 License
-This project is licensed under the MIT License - feel free to modify and adapt it for your own learning!
+Feel free to star ⭐ the repo if you found this project helpful!
