@@ -14,6 +14,7 @@ require('dotenv').config();
 
 const express = require('express');
 const cors = require('cors');
+const path = require('path');
 const Anthropic = require('@anthropic-ai/sdk');
 
 // Initialize the Express app
@@ -23,7 +24,12 @@ const PORT = process.env.PORT || 3000;
 // Middleware (functions that run on every request)
 app.use(cors());                      // Allows cross-origin requests
 app.use(express.json());              // Allows the server to read JSON bodies in requests
-app.use(express.static('public'));    // Serves all static files inside 'public' folder
+app.use(express.static(path.join(__dirname, 'public')));    // Serves all static files inside 'public' folder
+
+// Serve index.html for root path
+app.get('/', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
 
 // ==============================================================================
 // 🔑 Initialize Anthropic Claude Client
