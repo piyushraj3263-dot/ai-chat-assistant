@@ -1,6 +1,6 @@
 // ==============================================================================
-// 🛠️ DevPilot - Client Workspace Logic
-// Built by Piyush Raj
+// 🛠️ DevPilot - Computer Science Study & Revision Engine
+// Developed by Piyush Raj (B.Tech CSE)
 // ==============================================================================
 
 // Session memory state
@@ -16,6 +16,7 @@ const clearChatBtn = document.getElementById('clearChatBtn');
 const newChatBtn = document.getElementById('newChatBtn');
 const promptChips = document.querySelectorAll('.prompt-chip');
 const topicBoxes = document.querySelectorAll('.topic-box');
+const pills = document.querySelectorAll('.pill');
 const menuToggle = document.getElementById('menuToggle');
 const sidebar = document.getElementById('sidebar');
 
@@ -43,6 +44,27 @@ userInput.addEventListener('keydown', (e) => {
 
 // Click send
 sendBtn.addEventListener('click', handleSendMessage);
+
+// Subject Filter Pills
+pills.forEach((pill) => {
+  pill.addEventListener('click', () => {
+    pills.forEach(p => p.classList.remove('active'));
+    pill.classList.add('active');
+    const filter = pill.getAttribute('data-filter');
+
+    if (filter === 'dsa') {
+      triggerPrompt('Give me complete revision notes for Data Structures & Algorithms with Time Complexities.');
+    } else if (filter === 'os') {
+      triggerPrompt('Give me comprehensive exam revision notes for Operating Systems: CPU Scheduling, Deadlocks, Paging, and Semaphores.');
+    } else if (filter === 'dbms') {
+      triggerPrompt('Give me complete revision notes for DBMS: Normalization (1NF to BCNF), ACID, and SQL Joins.');
+    } else if (filter === 'cn') {
+      triggerPrompt('Explain Computer Networks: OSI 7-Layer Model, TCP 3-Way Handshake, DNS, and Subnetting.');
+    } else if (filter === 'all') {
+      resetSession();
+    }
+  });
+});
 
 // Sidebar quick prompts
 promptChips.forEach((chip) => {
@@ -176,7 +198,7 @@ function appendMessage(sender, text) {
   avatar.className = `avatar ${sender}-avatar`;
   avatar.innerHTML = sender === 'user'
     ? 'PR'
-    : '<i data-lucide="terminal"></i>';
+    : '<i data-lucide="book-open"></i>';
 
   const bubble = document.createElement('div');
   bubble.className = 'message-bubble';
@@ -204,7 +226,7 @@ function showTypingIndicator() {
 
   const avatar = document.createElement('div');
   avatar.className = 'avatar bot-avatar';
-  avatar.innerHTML = '<i data-lucide="terminal"></i>';
+  avatar.innerHTML = '<i data-lucide="book-open"></i>';
 
   const bubble = document.createElement('div');
   bubble.className = 'message-bubble';
@@ -232,7 +254,7 @@ function scrollToBottom() {
   messagesContainer.scrollTop = messagesContainer.scrollHeight;
 }
 
-// Markdown formatting for code, bold, lists
+// Markdown formatting for tables, headers, code, bold, lists
 function formatMarkdown(text) {
   let escaped = text
     .replace(/&/g, '&amp;')
@@ -247,13 +269,39 @@ function formatMarkdown(text) {
   // Inline code
   escaped = escaped.replace(/`([^`]+)`/g, '<code>$1</code>');
 
+  // Headings
+  escaped = escaped.replace(/^### (.*$)/gm, '<h3>$1</h3>');
+  escaped = escaped.replace(/^#### (.*$)/gm, '<h4>$1</h4>');
+
+  // Markdown Tables (| a | b |)
+  escaped = escaped.replace(/((?:\|[^\n]+\|\r?\n)+)/g, (match) => {
+    const lines = match.trim().split('\n');
+    if (lines.length < 2) return match;
+
+    let html = '<table>';
+    lines.forEach((line, index) => {
+      // Skip delimiter row like |---|---|
+      if (line.includes('---')) return;
+
+      const cells = line.split('|').filter((_, idx, arr) => idx > 0 && idx < arr.length - 1);
+      html += '<tr>';
+      cells.forEach(cell => {
+        const tag = index === 0 ? 'th' : 'td';
+        html += `<${tag}>${cell.trim()}</${tag}>`;
+      });
+      html += '</tr>';
+    });
+    html += '</table>';
+    return html;
+  });
+
   // Bold
   escaped = escaped.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
 
   // Bullet points
   escaped = escaped.replace(/^\s*[-*]\s+(.*)$/gm, '&bull; $1');
 
-  // Newlines
+  // Newlines (except after block elements)
   escaped = escaped.replace(/\n/g, '<br>');
 
   return escaped;

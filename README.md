@@ -1,4 +1,4 @@
-# DevPilot — Computer Science & Developer Workspace 🛠️
+# DevPilot — The Ultimate Computer Science Study & Revision Engine 🚀
 
 [![Live Demo](https://img.shields.io/badge/Live%20Demo-Vercel-success?style=for-the-badge&logo=vercel)](https://ai-chat-assistant-gold.vercel.app)
 [![GitHub Repo](https://img.shields.io/badge/GitHub-Repository-blue?style=for-the-badge&logo=github)](https://github.com/piyushraj3263-dot/ai-chat-assistant)
@@ -10,98 +10,103 @@
 
 Hey there! 👋 I'm **Piyush Raj**, a 2nd-year Computer Science & Engineering student. 
 
-I built **DevPilot** to solve a real student problem: having a clean, fast, interactive assistant to revise core Computer Science subjects (Data Structures, Algorithms, Operating Systems, DBMS, and Web Architecture) while practicing full-stack development and API architecture.
+I built **DevPilot** to solve a problem every engineering student faces during semester exams and technical placements: having to jump between 10 different websites, textbooks, and documentation to find clear, exam-oriented notes. 
+
+Rather than relying on generic chatbots that produce long, wordy essays, **DevPilot** provides structured, high-yield revision notes, ASCII architectural diagrams, Big-O comparison tables, and production-ready code implementations for every core Computer Science subject.
 
 ---
 
-## 💡 Why I Built This
+## 📚 Comprehensive Subject Coverage
 
-Earlier, I created a **CGPA Management System** to practice core data handling and logic. For my next project, I wanted to challenge myself by building a full-stack project involving:
-1. **Third-party API Integration:** Connecting a Node.js backend to the Anthropic Claude API.
-2. **Security Best Practices:** Ensuring secret keys are never exposed in client-side code by using environment variables (`dotenv`) and proper `.gitignore` rules.
-3. **Asynchronous JavaScript:** Handling `async/await`, `fetch()` calls, and dynamic DOM updates without page reloads.
-4. **Clean UI/UX:** Designing a responsive, dark-mode interface with code snippet formatting and typing animations.
+DevPilot provides instant revision notes and cheatsheets across all core CSE curriculum areas:
+
+1. **Data Structures & Algorithms (DSA):**
+   - Asymptotic complexity comparison table (Arrays, Linked Lists, Stacks, Queues, Trees, Heaps).
+   - Comparison sorting algorithms (QuickSort, MergeSort, HeapSort) with stability and in-place trade-offs.
+   - Master algorithm patterns for technical interviews (Two Pointers, Sliding Window, Floyd's Cycle, BFS/DFS, Dynamic Programming).
+   - Clean, bug-free C++ implementations with edge-case handling.
+
+2. **Operating Systems (OS):**
+   - Process vs Thread memory layouts and context switching mechanics.
+   - CPU Scheduling (FCFS, SJF, Round Robin, Priority) with Turnaround and Waiting Time formulas.
+   - Classical synchronization: Semaphores (counting vs binary), Mutex locking, Critical Section problem.
+   - Deadlocks: The 4 Coffman conditions, Banker's algorithm, prevention and avoidance.
+   - Memory Management: Paging, Segmentation, TLB caching, Page Replacement (FIFO, LRU, Optimal).
+
+3. **Database Management Systems (DBMS) & SQL:**
+   - Transaction management & ACID properties with real-world banking examples.
+   - Complete Schema Normalization guide (1NF, 2NF, 3NF, BCNF) with dependency tables.
+   - SQL Cheatsheet: \`INNER\`, \`LEFT\`, \`RIGHT\` joins, \`GROUP BY\` with \`HAVING\`, aggregate queries.
+   - Indexing internals: B+ Trees vs Hash indexing.
+
+4. **Computer Networks (CN):**
+   - Complete breakdown of the OSI 7-Layer Model vs TCP/IP Protocol Stack.
+   - TCP vs UDP transport layer comparison and TCP 3-Way Handshake flow.
+   - Step-by-step DNS resolution lifecycle.
+   - IPv4/IPv6 addressing and subnetting.
+
+5. **Object-Oriented Programming (OOP) & System Design:**
+   - The 4 Pillars (Encapsulation, Abstraction, Inheritance, Polymorphism) with clean C++ code.
+   - SOLID architectural principles with practical code violations and refactorings.
+
+6. **Placement & Technical Interview Cheatsheet:**
+   - Top 15 most frequent placement interview questions asked by top tech firms.
+   - Memory leak prevention, virtual memory, TCP handshake, and hashing trade-offs.
 
 ---
 
-## 🛠️ How It Works (Architecture)
+## 🛠️ System Architecture
 
 ```text
-Browser (Client)               Backend Server                 Anthropic Claude API
-┌──────────────────┐           ┌──────────────────┐           ┌────────────────────┐
-│ User types prompt│           │ Express Server   │           │ Cloud LLM Engine   │
-│ & views messages ├──────────►│ (server.js)      ├──────────►│                    │
-│                  │ POST JSON │ Attaches private │ HTTPS Req │ Processes context  │
-│                  │ /api/chat │ API key securely │ with body │ & returns reply    │
-│                  │◄──────────┤                  │◄──────────┤                    │
-└──────────────────┘ Returns   └──────────────────┘ Receives  └────────────────────┘
-                     AI reply                       tokens
+Browser Client (Workspace)         Node.js + Express Server           Anthropic Claude API
+┌─────────────────────────┐        ┌─────────────────────────┐        ┌───────────────────────┐
+│ Interactive Subject UI  │        │ Express Backend Proxy   │        │ Cloud LLM Engine      │
+│ Topic Pills & Notes Nav ├───────►│ (server.js)             ├───────►│ (Deep Technical Mode) │
+│ Markdown & Tables View  │  POST  │ High-Yield Knowledge    │ HTTPS  │ Context-Aware Answers │
+│                         │  JSON  │ Base + Secure Key Proxy │ Req    │                       │
+│                         │◄───────┤                         │◄───────┤                       │
+└─────────────────────────┘        └─────────────────────────┘        └───────────────────────┘
 ```
-
-### The Key Lesson I Learned:
-In my first draft, I thought about calling the API directly from the browser's JavaScript. But I quickly realized that anyone could open DevTools (`F12`), look at network requests or source code, and steal the API key! 
-
-To fix this, I built a lightweight **Express.js backend** that acts as a secure intermediary (proxy). The browser only talks to `/api/chat`, and my server handles the sensitive API authentication.
 
 ---
 
 ## 🚀 Features
 
-- 🗣️ **Multilingual & Hinglish Support:** Understands and answers technical CS queries in English, Hindi, and natural Hinglish (e.g. *"bhai REST API samjha do"*).
-- 💬 **Multi-Turn Memory:** Retains conversation context so the assistant remembers past questions during a session.
-- ⚡ **Real-Time Code Formatting:** Automatically detects and formats code blocks and backticks for readable syntax.
-- 🎨 **Dark-Themed Workspace UI:** Custom CSS layout with quick-start prompt shortcuts for CS topics (Big-O, interview prep, API concepts).
-- 📱 **Responsive Design:** Includes mobile sidebar toggle and auto-expanding input field.
-- 🔒 **Secure Backend Proxy:** Separates sensitive API keys from the browser using Node.js and `.env`.
+- 📑 **Instant Subject Filters:** One-click pills for DSA, OS, DBMS, Networks, and Interview Prep.
+- 📊 **Markdown Tables & Code Formatting:** Renders clean complexity tables, bulleted summaries, and syntax-highlighted code.
+- 🔒 **Secure Backend Proxy:** API keys are never exposed to client-side browsers.
+- ⚡ **Zero-Latency Fallback Engine:** Provides high-yield revision notes instantly even without an external API connection.
+- 📱 **Responsive Dark-Mode Workspace:** Optimized for desktop monitors, tablets, and mobile devices.
 
 ---
 
 ## 🧰 Tech Stack
 
-- **Frontend:** HTML5, CSS3, Vanilla JavaScript (ES6+), Lucide Icons
+- **Frontend:** Vanilla HTML5, CSS3, JavaScript (ES6+), Lucide Icons
 - **Backend:** Node.js, Express.js, CORS
 - **AI Integration:** `@anthropic-ai/sdk` (Claude API)
-- **Tools:** Git, GitHub, npm
+- **Deployment & CI/CD:** Vercel, Git, GitHub
 
 ---
 
 ## 💻 Running Locally
 
-If you want to run this project on your own machine:
-
-### 1. Clone the repo
 ```bash
+# 1. Clone the repository
 git clone https://github.com/piyushraj3263-dot/ai-chat-assistant.git
 cd ai-chat-assistant
-```
 
-### 2. Install dependencies
-```bash
+# 2. Install dependencies
 npm install
-```
 
-### 3. Set up your API key
-Create a `.env` file in the root folder:
-```env
-ANTHROPIC_API_KEY=your_claude_api_key_here
-PORT=3000
-```
-*(Get a key from [console.anthropic.com](https://console.anthropic.com))*
+# 3. Create .env file with your API key
+echo "ANTHROPIC_API_KEY=your_key_here" > .env
+echo "PORT=3000" >> .env
 
-### 4. Start the server
-```bash
+# 4. Start the server
 npm start
 ```
-Then open [http://localhost:3000](http://localhost:3000) in your browser!
-
----
-
-## 📚 What I Learned Building This Project
-
-1. **Client-Server Separation:** How frontend `fetch()` communicates with backend Express routes using JSON bodies.
-2. **LLM Mechanics:** What system prompts are, how token limits (`max_tokens`) work, and how conversation arrays (`role: 'user'` / `role: 'assistant'`) maintain context.
-3. **API Security:** The importance of `.env` files and keeping production secrets out of public GitHub repositories.
-4. **Git Workflow:** Managing branches, clean commit messages, and deployment setup for cloud hosting.
+Visit **http://localhost:3000** in your browser!
 
 ---
 
@@ -110,5 +115,3 @@ Then open [http://localhost:3000](http://localhost:3000) in your browser!
 **Piyush Raj**
 - GitHub: [@piyushraj3263-dot](https://github.com/piyushraj3263-dot)
 - Education: B.Tech in Computer Science & Engineering (2nd Year)
-
-Feel free to star ⭐ the repo if you found this project helpful!

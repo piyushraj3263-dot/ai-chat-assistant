@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>DevPilot — CS & Developer Assistant by Piyush Raj</title>
+  <title>DevPilot — Ultimate Computer Science Study &amp; Placement Engine</title>
   <link rel="stylesheet" href="style.css">
   <!-- Google Fonts: Inter & JetBrains Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -19,39 +19,43 @@
       <div class="sidebar-header">
         <div class="brand">
           <div class="brand-icon">
-            <i data-lucide="terminal"></i>
+            <i data-lucide="book-open-check"></i>
           </div>
           <div class="brand-text">
             <h2>DevPilot</h2>
-            <span class="badge">v1.0</span>
+            <span class="badge">CS Hub</span>
           </div>
         </div>
         <button class="new-chat-btn" id="newChatBtn">
           <i data-lucide="plus"></i>
-          <span>New Session</span>
+          <span>New Revision</span>
         </button>
       </div>
 
+      <!-- Subject Tabs / Sections -->
       <div class="sidebar-section">
-        <h3>Core CS Topics (English &amp; Hinglish)</h3>
+        <h3>Core Subject Notes</h3>
         <div class="quick-prompts">
-          <button class="prompt-chip" data-prompt="Bhai, REST API simple real-life example ke saath samjha do.">
-            <i data-lucide="globe"></i> REST API (Hinglish)
+          <button class="prompt-chip" data-prompt="Give me complete revision notes for Data Structures & Algorithms with Time Complexities.">
+            <i data-lucide="binary"></i> DSA Full Roadmap &amp; Cheatsheet
           </button>
-          <button class="prompt-chip" data-prompt="Binary Search ka logic aur C++ code samjha do.">
-            <i data-lucide="binary"></i> Binary Search (Hinglish)
+          <button class="prompt-chip" data-prompt="Give me comprehensive exam revision notes for Operating Systems: CPU Scheduling, Deadlocks, Paging, and Semaphores.">
+            <i data-lucide="cpu"></i> Operating Systems Notes
           </button>
-          <button class="prompt-chip" data-prompt="QuickSort vs MergeSort: Kaunsa fast hai aur kyu?">
-            <i data-lucide="arrow-up-down"></i> Quick vs Merge (Hinglish)
+          <button class="prompt-chip" data-prompt="Give me complete revision notes for DBMS: Normalization (1NF to BCNF), ACID, and SQL Joins.">
+            <i data-lucide="database"></i> DBMS &amp; SQL Cheatsheet
           </button>
-          <button class="prompt-chip" data-prompt="Explain the 4 ACID properties in DBMS with real database transaction examples.">
-            <i data-lucide="database"></i> DBMS ACID Properties
+          <button class="prompt-chip" data-prompt="Explain Computer Networks: OSI 7-Layer Model, TCP 3-Way Handshake, DNS, and Subnetting.">
+            <i data-lucide="network"></i> Computer Networks Notes
           </button>
-          <button class="prompt-chip" data-prompt="Operating Systems me Deadlock ke 4 conditions kya hote hain?">
-            <i data-lucide="cpu"></i> OS Deadlock (Hinglish)
+          <button class="prompt-chip" data-prompt="Explain Object-Oriented Programming (OOP) 4 Pillars and SOLID Principles with clean C++ code.">
+            <i data-lucide="boxes"></i> OOP &amp; SOLID Principles
           </button>
-          <button class="prompt-chip" data-prompt="2nd year CSE students ke liye top 5 technical interview questions with answers batao.">
-            <i data-lucide="briefcase"></i> Interview Prep (Hinglish)
+          <button class="prompt-chip" data-prompt="Give me the Top 15 Technical Interview Questions and Answers for CSE Placements.">
+            <i data-lucide="briefcase"></i> Placement Interview Prep
+          </button>
+          <button class="prompt-chip" data-prompt="Explain how REST APIs, HTTP Verbs, and Client-Server Web Architecture work.">
+            <i data-lucide="globe"></i> Web &amp; REST APIs
           </button>
         </div>
       </div>
@@ -61,33 +65,36 @@
           <div class="author-avatar">PR</div>
           <div class="author-info">
             <strong>Piyush Raj</strong>
-            <span>2nd Year B.Tech CSE</span>
+            <span>CSE Engineering &bull; Creator</span>
           </div>
         </div>
         <a href="https://github.com/piyushraj3263-dot/ai-chat-assistant" target="_blank" rel="noopener noreferrer" class="github-button">
           <i data-lucide="github"></i>
-          <span>View Source on GitHub</span>
+          <span>Source Code on GitHub</span>
         </a>
       </div>
     </aside>
 
-    <!-- Main Chat Workspace -->
+    <!-- Main Workspace Area -->
     <main class="chat-main">
-      <!-- Top Navigation Bar -->
+      <!-- Header -->
       <header class="chat-header">
         <div class="header-left">
           <button class="menu-toggle" id="menuToggle" aria-label="Toggle Navigation">
             <i data-lucide="menu"></i>
           </button>
           <div class="header-title-group">
-            <h1>DevPilot <span class="tag">CS Assistant</span></h1>
-            <p>Built by Piyush Raj &bull; Interactive Knowledge & Code Assistant</p>
+            <h1>DevPilot <span class="tag">Exam &amp; Placement Engine</span></h1>
+            <p>Built by Piyush Raj &bull; Complete Revision Notes &amp; Coding Solutions for CSE Students</p>
           </div>
         </div>
         <div class="header-right">
-          <div class="status-chip">
-            <span class="status-pulse"></span>
-            <span>Ready</span>
+          <div class="subject-pills">
+            <span class="pill active" data-filter="all">All</span>
+            <span class="pill" data-filter="dsa">DSA</span>
+            <span class="pill" data-filter="os">OS</span>
+            <span class="pill" data-filter="dbms">DBMS</span>
+            <span class="pill" data-filter="cn">Networks</span>
           </div>
           <button class="icon-btn" id="clearChatBtn" title="Reset Session">
             <i data-lucide="rotate-ccw"></i>
@@ -100,44 +107,60 @@
         <!-- Welcome Screen -->
         <div class="welcome-screen" id="welcomeScreen">
           <div class="welcome-badge">
-            <i data-lucide="code-2"></i>
-            <span>Computer Science & Coding Companion</span>
+            <i data-lucide="graduation-cap"></i>
+            <span>The Complete Computer Science Revision Suite</span>
           </div>
-          <h2>Welcome to DevPilot 👋</h2>
+          <h2>Master Computer Science in One Place 🚀</h2>
           <p class="welcome-desc">
-            An interactive assistant I built to help review Data Structures, Operating Systems, DBMS, Web APIs, and interview problems.
+            No more searching 10 different websites. Get structured exam notes, complexity tables, implementation code, and interview answers in seconds.
           </p>
 
           <div class="topic-grid">
-            <div class="topic-box" data-prompt="Explain how Big-O notation measures time and space complexity with simple code examples.">
-              <div class="topic-box-icon"><i data-lucide="gauge"></i></div>
-              <div class="topic-box-content">
-                <h4>Time & Space Complexity</h4>
-                <p>O(1), O(log n), O(n), O(n²) explained with practical code</p>
-              </div>
-            </div>
-
-            <div class="topic-box" data-prompt="What is the difference between a Process and a Thread in Operating Systems?">
-              <div class="topic-box-icon"><i data-lucide="layers"></i></div>
-              <div class="topic-box-content">
-                <h4>Processes vs Threads</h4>
-                <p>Memory layout, context switching, and concurrency</p>
-              </div>
-            </div>
-
-            <div class="topic-box" data-prompt="Explain Database Normalization: 1NF, 2NF, 3NF, and BCNF with examples.">
-              <div class="topic-box-icon"><i data-lucide="table"></i></div>
-              <div class="topic-box-content">
-                <h4>DBMS Normalization</h4>
-                <p>Anomalies, dependencies, and schema decomposition</p>
-              </div>
-            </div>
-
-            <div class="topic-box" data-prompt="Write a clean Binary Search implementation and explain why its complexity is O(log n).">
+            <div class="topic-box" data-prompt="Give me complete revision notes for Data Structures & Algorithms with Time Complexities.">
               <div class="topic-box-icon"><i data-lucide="binary"></i></div>
               <div class="topic-box-content">
-                <h4>Binary Search Algorithm</h4>
-                <p>Divide-and-conquer logic, edge cases, and code</p>
+                <h4>DSA Master Cheatsheet</h4>
+                <p>Arrays, Trees, Graphs, Sorting, DP &amp; Big-O reference</p>
+              </div>
+            </div>
+
+            <div class="topic-box" data-prompt="Give me comprehensive exam revision notes for Operating Systems: CPU Scheduling, Deadlocks, Paging, and Semaphores.">
+              <div class="topic-box-icon"><i data-lucide="cpu"></i></div>
+              <div class="topic-box-content">
+                <h4>Operating Systems High-Yield Notes</h4>
+                <p>Deadlocks, CPU Scheduling, Virtual Memory &amp; Paging</p>
+              </div>
+            </div>
+
+            <div class="topic-box" data-prompt="Give me complete revision notes for DBMS: Normalization (1NF to BCNF), ACID, and SQL Joins.">
+              <div class="topic-box-icon"><i data-lucide="database"></i></div>
+              <div class="topic-box-content">
+                <h4>DBMS &amp; SQL Revision</h4>
+                <p>Normalization 1NF-BCNF, ACID properties, Transactions &amp; Joins</p>
+              </div>
+            </div>
+
+            <div class="topic-box" data-prompt="Explain Computer Networks: OSI 7-Layer Model, TCP 3-Way Handshake, DNS, and Subnetting.">
+              <div class="topic-box-icon"><i data-lucide="network"></i></div>
+              <div class="topic-box-content">
+                <h4>Computer Networks Core Guide</h4>
+                <p>OSI 7 Layers, TCP/IP, Handshakes, DNS &amp; Subnetting</p>
+              </div>
+            </div>
+
+            <div class="topic-box" data-prompt="Explain Object-Oriented Programming (OOP) 4 Pillars and SOLID Principles with clean C++ code.">
+              <div class="topic-box-icon"><i data-lucide="boxes"></i></div>
+              <div class="topic-box-content">
+                <h4>OOP &amp; SOLID Principles</h4>
+                <p>Encapsulation, Polymorphism, Abstraction, Inheritance &amp; Design</p>
+              </div>
+            </div>
+
+            <div class="topic-box" data-prompt="Give me the Top 15 Technical Interview Questions and Answers for CSE Placements.">
+              <div class="topic-box-icon"><i data-lucide="briefcase"></i></div>
+              <div class="topic-box-content">
+                <h4>Placement &amp; Interview Cheatsheet</h4>
+                <p>Top 15 frequently asked interview concepts with crisp answers</p>
               </div>
             </div>
           </div>
@@ -149,7 +172,7 @@
         <div class="input-card">
           <textarea
             id="userInput"
-            placeholder="Ask in English or Hinglish (e.g., 'bhai REST API samjha do')..."
+            placeholder="Ask any CS subject topic, algorithm, complexity proof, or paste code to analyze..."
             rows="1"
           ></textarea>
           <button id="sendBtn" class="send-action-btn" aria-label="Send Query" disabled>
@@ -157,8 +180,8 @@
           </button>
         </div>
         <div class="input-footer">
-          <span>DevPilot by Piyush Raj &bull; Computer Science Portfolio</span>
-          <span class="shortcut-hint">Press <strong>Enter</strong> to send, <strong>Shift+Enter</strong> for newline</span>
+          <span>DevPilot by Piyush Raj &bull; Computer Science Revision Engine</span>
+          <span class="shortcut-hint">Press <strong>Enter</strong> to search notes, <strong>Shift+Enter</strong> for newline</span>
         </div>
       </div>
     </main>

@@ -1,5 +1,5 @@
 // ==============================================================================
-// 🛠️ DevPilot - Multilingual & Hinglish Backend Server
+// 🛠️ DevPilot - Comprehensive Computer Science Study & Revision Engine
 // Developed by Piyush Raj (B.Tech CSE)
 // ==============================================================================
 
@@ -31,328 +31,354 @@ const hasLiveKey = process.env.ANTHROPIC_API_KEY &&
 const anthropic = hasLiveKey ? new Anthropic({ apiKey: process.env.ANTHROPIC_API_KEY }) : null;
 
 // ==============================================================================
-// 🗣️ Hinglish / Hindi Detector
+// 📚 The Ultimate Computer Science Knowledge Engine
+// High-Yield Exam Notes, Formulas, Comparison Tables, & Production Code
 // ==============================================================================
-function isHinglishQuery(text) {
-  const lower = text.toLowerCase();
-  // Hindi Devanagari script check
-  if (/[ऀ-ॿ]/.test(text)) return true;
+function getStudyNotes(prompt) {
+  const query = prompt.toLowerCase().trim();
 
-  // Common Hinglish keywords
-  const hinglishTokens = [
-    'kya', 'hai', 'kaise', 'kese', 'kare', 'karo', 'samjha', 'samjhao',
-    'batao', 'bata', 'bhai', 'taiyari', 'aur', 'ka', 'ki', 'ke', 'ko',
-    'me', 'mein', 'nahi', 'hota', 'hoti', 'hote', 'chalega', 'samajh',
-    'bataiye', 'mujhe', 'mera', 'meri', 'karna', 'kaunsa', 'kyu', 'shuru',
-    'bhasha', 'chahiye', 'sikhe', 'sikho', 'dost', 'batao'
-  ];
+  // 1. DATA STRUCTURES & ALGORITHMS (DSA)
+  if (query.includes('dsa') || query.includes('algorithm') || query.includes('data structure') || query.includes('big-o') || query.includes('complexity')) {
+    return `### 🌲 Data Structures & Algorithms (DSA) — Complete Master Notes
 
-  return hinglishTokens.some(token => new RegExp(`\\b${token}\\b`, 'i').test(lower));
-}
+#### 1. Asymptotic Complexity Reference
+Big-O denotes the theoretical upper bound of execution time/space relative to input size \`n\`:
+\`O(1) < O(log n) < O(n) < O(n log n) < O(n²) < O(2ⁿ) < O(n!)\`
 
-// ==============================================================================
-// 🧠 Computer Science Knowledge Base (English & Hinglish Support)
-// ==============================================================================
-function getKnowledgeBaseResponse(prompt) {
-  const query = prompt.toLowerCase();
-  const isHinglish = isHinglishQuery(prompt);
+| Data Structure | Access | Search | Insertion | Deletion | Space |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| **Array** | O(1) | O(n) | O(n) | O(n) | O(n) |
+| **Singly Linked List** | O(n) | O(n) | O(1) *(at head)* | O(1) *(at head)* | O(n) |
+| **Stack (LIFO)** | O(n) | O(n) | O(1) *(push)* | O(1) *(pop)* | O(n) |
+| **Queue (FIFO)** | O(n) | O(n) | O(1) *(enqueue)*| O(1) *(dequeue)*| O(n) |
+| **Hash Table** | N/A | O(1) avg / O(n) | O(1) avg / O(n) | O(1) avg / O(n) | O(n) |
+| **Binary Search Tree**| O(log n) avg | O(log n) avg | O(log n) avg | O(log n) avg | O(n) |
+| **AVL / Red-Black Tree**| O(log n) | O(log n) | O(log n) | O(log n) | O(n) |
 
-  // 1. REST APIs & Architecture
-  if (query.includes('rest') || query.includes('api') || query.includes('client-server')) {
-    if (isHinglish) {
-      return `### 🌐 REST API Kya Hoti Hai? (Simple Hinglish Me)
+#### 2. Comparison Sorting Algorithms
+| Algorithm | Best Time | Average Time | Worst Time | Space | Stable? | In-Place? |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| **QuickSort** | O(n log n) | O(n log n) | O(n²) *(bad pivot)*| O(log n) | No | Yes |
+| **MergeSort** | O(n log n) | O(n log n) | O(n log n) | O(n) | Yes | No |
+| **HeapSort** | O(n log n) | O(n log n) | O(n log n) | O(1) | No | Yes |
+| **InsertionSort** | O(n) | O(n²) | O(n²) | O(1) | Yes | Yes |
 
-Bhai, **REST API** ko ek restaurant ke example se samjho:
-- **Client (Aap / Browser):** Table pe baitha customer jo khana order karta hai.
-- **Server (Backend / Database):** Restaurant ka kitchen jahan sara data aur khana store hota hai.
-- **API (Waiter):** Jo aapka order (Request) kitchen le jata hai aur khana banne ke baad aapki table pe wapas laata hai (Response)!
-
-#### 4 Main HTTP Methods:
-1. \`GET\`: Data laane ke liye (jaise user profile fetch karna).
-2. \`POST\`: Naya data bhejne ke liye (jaise naya account banana ya message send karna).
-3. \`PUT\` / \`PATCH\`: Purana data update ya edit karne ke liye.
-4. \`DELETE\`: Data delete karne ke liye.
-
-#### Simple Express.js Backend Code:
-\`\`\`javascript
-const express = require('express');
-const app = express();
-app.use(express.json());
-
-// GET Endpoint - Data bhejne ke liye
-app.get('/api/student', (req, res) => {
-  res.json({ name: 'Piyush Raj', branch: 'CSE 2nd Year' });
-});
-
-// POST Endpoint - Client se naya data lene ke liye
-app.post('/api/student', (req, res) => {
-  const data = req.body;
-  res.status(201).json({ message: 'Data successfully save ho gaya!', data });
-});
-
-app.listen(3000);
-\`\`\`
-
-#### HTTP Status Codes jo interview me puchte hain:
-- \`200 OK\`: Request successful rahi.
-- \`201 Created\`: Naya resource successfully ban gaya.
-- \`400 Bad Request\`: Client ne galat data bheja.
-- \`404 Not Found\`: Wo page ya data server pe mila hi nahi.
-- \`500 Server Error\`: Backend server code me koi crash ho gaya.`;
+#### 3. Standard Binary Search (C++):
+\`\`\`cpp
+int binarySearch(const vector<int>& nums, int target) {
+    int left = 0, right = nums.size() - 1;
+    while (left <= right) {
+        int mid = left + (right - left) / 2; // Prevents 32-bit integer overflow
+        if (nums[mid] == target) return mid;
+        else if (nums[mid] < target) left = mid + 1;
+        else right = mid - 1;
     }
-
-    return `### 🌐 Understanding REST APIs & Client-Server Architecture
-
-A **REST (Representational State Transfer)** API is an architectural standard for exchanging data between a client (browser/mobile app) and a backend server over **HTTP**.
-
-#### 1. Core Principles:
-- **Statelessness:** Every request contains all information needed to process it. The server stores no client session context.
-- **Client-Server Separation:** The user interface (client) and data storage (server) operate independently.
-- **HTTP Methods:** \`GET\` (Read), \`POST\` (Create), \`PUT\`/\`PATCH\` (Update), \`DELETE\` (Remove).
-
-#### 2. Express.js Code Example:
-\`\`\`javascript
-const express = require('express');
-const app = express();
-app.use(express.json());
-
-app.get('/api/users/:id', (req, res) => {
-  res.json({ id: req.params.id, name: 'Piyush', branch: 'CSE' });
-});
-
-app.post('/api/users', (req, res) => {
-  res.status(201).json({ message: 'User created successfully', data: req.body });
-});
-
-app.listen(3000);
+    return -1; // Target not found
+}
 \`\`\`
 
-#### 3. Common Status Codes:
-- \`200 OK\` &bull; \`201 Created\` &bull; \`400 Bad Request\` &bull; \`404 Not Found\` &bull; \`500 Server Error\``;
+#### 4. Top Algorithm Patterns for Technical Placements:
+- **Two Pointers:** Pair sum in sorted array, palindrome checks, Dutch National Flag.
+- **Sliding Window:** Longest substring without repeating characters, maximum sum subarray of size k.
+- **Fast & Slow Pointers (Floyd's Cycle):** Cycle detection in linked list, finding list middle.
+- **Breadth-First Search (BFS):** Level-order traversal, shortest path in unweighted graphs (Queue).
+- **Depth-First Search (DFS):** Connected components, topological sort, backtracking (Recursion/Stack).
+- **Dynamic Programming (Memoization/Tabulation):** 0/1 Knapsack, Longest Common Subsequence (LCS), Coin Change.`;
   }
 
-  // 2. Binary Search
-  if (query.includes('binary search') || query.includes('binary')) {
-    if (isHinglish) {
-      return `### 🔍 Binary Search Algorithm (Hinglish Explanation)
+  // 2. OPERATING SYSTEMS (OS)
+  if (query.includes('operating system') || query.includes(' os ') || query.includes('deadlock') || query.includes('scheduling') || query.includes('paging') || query.includes('semaphore') || query.includes('process')) {
+    return `### ⚙️ Operating Systems (OS) — Exam & Interview Notes
 
-**Binary Search** ek bohot fast search technique hai, par iska **ek rule hai: Array hamesha sorted hona chahiye!**
+#### 1. Process vs Thread
+- **Process:** An executing program with isolated address space, PCB (Process Control Block), heap, and file descriptors. Context switching is expensive.
+- **Thread:** Lightweight execution unit within a process. Threads share code segment, data segment, and OS resources, but maintain independent stacks and registers.
 
-#### Kaam kaise karta hai (Divide & Conquer):
-1. Array ke beech ka index (\`mid\`) find karo: \`mid = low + (high - low) / 2\`
-2. Agar \`arr[mid] == target\`, toh number mil gaya!
-3. Agar target chhota hai, toh left half me dhundo (\`high = mid - 1\`).
-4. Agar target bada hai, toh right half me dhundo (\`low = mid + 1\`).
-5. Har step pe search space **aadhi (half)** ho jaati hai, isiliye time complexity sirf **O(log n)** aati hai!
+#### 2. CPU Scheduling Algorithms
+Key Formulas:
+- **Turnaround Time (TAT)** = Completion Time (CT) &minus; Arrival Time (AT)
+- **Waiting Time (WT)** = Turnaround Time (TAT) &minus; Burst Time (BT)
 
-#### C++ Implementation:
+| Scheduling Algorithm | Preemptive? | Starvation Possible? | Optimal For |
+| :--- | :--- | :--- | :--- |
+| **FCFS (First-Come First-Served)** | No | No (suffers Convoy Effect) | Simple batch systems |
+| **SJF (Shortest Job First)** | No / Yes (SRTF) | Yes (long processes starve)| Minimum average waiting time |
+| **Round Robin (RR)** | Yes (time quantum) | No | Time-sharing systems, fairness |
+| **Priority Scheduling** | Both | Yes (mitigated via Aging) | Real-time / critical jobs |
+
+#### 3. Classical Synchronization: Mutex vs Semaphore
+- **Mutex (Mutual Exclusion):** Locking mechanism. Only the thread that locked the mutex can unlock it (ownership semantics).
+- **Binary Semaphore:** Integer flag (\`0\` or \`1\`) with atomic \`wait()\` (P) and \`signal()\` (V) operations. Any thread can signal.
+- **Counting Semaphore:** Integer value \`N\` representing available shared resource instances.
+
+#### 4. Deadlocks — The 4 Coffman Conditions
+A deadlock occurs if and only if all four conditions hold concurrently:
+1. **Mutual Exclusion:** At least one non-shareable resource.
+2. **Hold and Wait:** A process holds resources while requesting others.
+3. **No Preemption:** Resources cannot be forcibly reclaimed from a running process.
+4. **Circular Wait:** Closed circular loop of processes waiting for held resources.
+*Mitigation:* Banker's Algorithm (Avoidance), Resource Hierarchy (Prevention), Resource Allocation Graph cycle detection (Detection & Recovery).
+
+#### 5. Memory Management & Virtual Memory
+- **Paging:** Divides physical memory into fixed-size **Frames** and logical memory into same-size **Pages**. Eliminates external fragmentation, but causes internal fragmentation.
+- **TLB (Translation Lookaside Buffer):** Fast hardware cache for page table lookups.
+- **Page Replacement Policies:** FIFO (suffers Belady's Anomaly), LRU (Least Recently Used), Optimal (offline benchmark).`;
+  }
+
+  // 3. DATABASE MANAGEMENT SYSTEMS (DBMS) & SQL
+  if (query.includes('dbms') || query.includes('database') || query.includes('sql') || query.includes('normalization') || query.includes('acid') || query.includes('join')) {
+    return `### 🗄️ Database Management Systems (DBMS) & SQL Notes
+
+#### 1. ACID Properties (Transaction Integrity)
+- **Atomicity:** Entire transaction executes or completely rolls back ("all-or-nothing").
+- **Consistency:** Transactions preserve schema constraints, primary/foreign keys, and triggers.
+- **Isolation:** Concurrent transactions execute without mutual interference.
+  - *Isolation Levels:* Read Uncommitted < Read Committed < Repeatable Read < Serializable.
+- **Durability:** Committed state modifications are permanent on disk via Write-Ahead Logging (WAL).
+
+#### 2. Normalization Stages (Eliminating Anomalies)
+Normalization eliminates update, insertion, and deletion anomalies by decomposing redundant schemas:
+
+| Normal Form | Rule Requirement | Dependency Addressed |
+| :--- | :--- | :--- |
+| **1NF** | Atomic values per column, unique row identifiers, no repeating arrays | Eliminates non-atomic composite values |
+| **2NF** | Must be in 1NF + No **Partial Dependencies** | Non-prime attributes must depend on entire candidate key |
+| **3NF** | Must be in 2NF + No **Transitive Dependencies** | For X &rarr; Y, X is Super Key or Y is prime attribute |
+| **BCNF** | Stricter 3NF: For every functional dependency X &rarr; Y, **X must be a Super Key** | Eliminates all functional redundancy |
+
+#### 3. SQL Joins Cheatsheet
+\`\`\`sql
+-- INNER JOIN: Records with matching keys in BOTH tables
+SELECT u.name, o.total
+FROM Users u
+INNER JOIN Orders o ON u.id = o.user_id;
+
+-- LEFT JOIN: All records from Left, matched records from Right (NULL if none)
+SELECT u.name, o.total
+FROM Users u
+LEFT JOIN Orders o ON u.id = o.user_id;
+
+-- GROUP BY with HAVING (Aggregate filter)
+SELECT department, COUNT(*) as emp_count, AVG(salary) as avg_sal
+FROM Employees
+GROUP BY department
+HAVING AVG(salary) > 75000;
+\`\`\`
+
+#### 4. Indexing: B-Trees vs Hash Indexes
+- **B+ Tree Index:** Balanced multi-level tree storing data pointers only at leaf nodes. Supports \`O(log n)\` lookups and efficient **range queries** (\`BETWEEN\`, \`<\`, \`>\`).
+- **Hash Index:** Direct key-to-bucket mapping. Super-fast \`O(1)\` equality checks (\`=\`), but cannot perform range searches.`;
+  }
+
+  // 4. COMPUTER NETWORKS (CN)
+  if (query.includes('network') || query.includes(' cn ') || query.includes('osi') || query.includes('tcp') || query.includes('dns') || query.includes('http') || query.includes('subnet')) {
+    return `### 🌐 Computer Networks (CN) — Complete Exam & Interview Guide
+
+#### 1. OSI 7-Layer vs TCP/IP Protocol Stack
+| Layer | OSI Name | Primary Role | Core Protocols | Data Unit |
+| :--- | :--- | :--- | :--- | :--- |
+| **7** | **Application** | Network services to user software | HTTP, HTTPS, FTP, DNS, SSH | Messages / Data |
+| **6** | **Presentation** | Data encryption, compression, formatting | TLS/SSL, JPEG, ASCII | Data |
+| **5** | **Session** | Dialog control and session tokens | RPC, NetBIOS | Data |
+| **4** | **Transport** | End-to-end reliability and port addressing | TCP, UDP | **Segments / Datagrams** |
+| **3** | **Network** | Logical addressing and routing | IPv4, IPv6, ICMP, OSPF, BGP | **Packets** |
+| **2** | **Data Link** | MAC addressing, error detection (CRC), framing | Ethernet, Wi-Fi (802.11), ARP | **Frames** |
+| **1** | **Physical** | Transmission of raw bits over physical media | Cables, Fiber, Radio signals | **Bits** |
+
+#### 2. Transport Protocols: TCP vs UDP
+- **TCP (Transmission Control Protocol):** Connection-oriented, guaranteed delivery, sequenced packets, flow control (sliding window), congestion avoidance. Used by Web, Banking, File Transfer.
+- **UDP (User Datagram Protocol):** Connectionless, lightweight, low-latency, packet loss possible without acknowledgments. Used by DNS queries, VoIP, live streaming, online gaming.
+
+#### 3. TCP 3-Way Handshake (Connection Establishment)
+\`\`\`text
+Client                                  Server
+  │                 SYN (seq=x)            │
+  ├───────────────────────────────────────►│  (Server allocates buffers)
+  │                                        │
+  │            SYN-ACK (seq=y, ack=x+1)    │
+  │◄───────────────────────────────────────┤  (Client validates seq)
+  │                                        │
+  │                 ACK (ack=y+1)          │
+  ├───────────────────────────────────────►│  (Connection ESTABLISHED)
+\`\`\`
+*Connection Termination:* 4-way handshake using \`FIN\` and \`ACK\` packets.
+
+#### 4. DNS Resolution (Step-by-Step)
+When you type \`https://google.com\` in a browser:
+1. Browser Cache &rarr; OS Cache &rarr; Router Cache.
+2. Query reaches **Recursive DNS Resolver** (ISP / 8.8.8.8).
+3. Resolver queries **Root Nameserver** (\`.\`) &rarr; returns TLD server (\`.com\`).
+4. Resolver queries **TLD Nameserver** (\`.com\`) &rarr; returns Authoritative server (\`ns1.google.com\`).
+5. **Authoritative Nameserver** returns IPv4/IPv6 address.
+6. Browser opens TCP connection to resolved IP.`;
+  }
+
+  // 5. OBJECT-ORIENTED PROGRAMMING (OOP) & SYSTEM DESIGN
+  if (query.includes('oop') || query.includes('solid') || query.includes('inheritance') || query.includes('polymorphism') || query.includes('design pattern')) {
+    return `### 🧱 Object-Oriented Programming (OOP) & SOLID Architecture
+
+#### 1. The 4 Pillars of OOP
+1. **Encapsulation:** Wrapping attributes and methods into a class while restricting direct member access via \`private\`/\`protected\` specifiers.
+2. **Abstraction:** Exposing high-level interfaces while hiding complex internal logic (using abstract classes / pure virtual functions).
+3. **Inheritance:** Deriving attributes and methods from base classes to maximize code reusability.
+4. **Polymorphism:**
+   - *Compile-Time (Static):* Method overloading, operator overloading.
+   - *Run-Time (Dynamic):* Virtual functions and method overriding via vtables.
+
+#### Clean C++ Implementation:
 \`\`\`cpp
 #include <iostream>
-#include <vector>
+#include <string>
 using namespace std;
 
-int binarySearch(const vector<int>& arr, int target) {
-    int low = 0, high = arr.size() - 1;
+// Abstraction via Interface
+class PaymentMethod {
+public:
+    virtual void pay(double amount) = 0; // Pure virtual function
+    virtual ~PaymentMethod() = default;
+};
 
-    while (low <= high) {
-        int mid = low + (high - low) / 2; // Overflow se bachne ke liye
-
-        if (arr[mid] == target) return mid;       // Mil gaya!
-        else if (arr[mid] < target) low = mid + 1; // Right side jao
-        else high = mid - 1;                      // Left side jao
+// Polymorphic implementations
+class CreditCard : public PaymentMethod {
+private:
+    string cardNumber; // Encapsulated private field
+public:
+    CreditCard(string num) : cardNumber(num) {}
+    void pay(double amount) override {
+        cout << "Paid ₹" << amount << " using Card ending in " << cardNumber.substr(cardNumber.length() - 4) << endl;
     }
-    return -1; // Nahi mila
-}
+};
+
+class UPI : public PaymentMethod {
+private:
+    string upiId;
+public:
+    UPI(string id) : upiId(id) {}
+    void pay(double amount) override {
+        cout << "Paid ₹" << amount << " via UPI ID: " << upiId << endl;
+    }
+};
 \`\`\`
 
-#### Time & Space Complexity:
-- **Best Case:** \`O(1)\` (agar pehli baar me hi mid element mil jaye)
-- **Worst Case:** \`O(log n)\` (agar array me 1,000,000 elements hain, toh sirf ~20 comparisons me answer mil jayega!)
-- **Space Complexity:** \`O(1)\` (iterative approach me koi extra memory nahi lagti)`;
-    }
-
-    return `### 🔍 Binary Search Algorithm
-
-Binary search is an efficient search algorithm on **sorted** arrays operating on the **Divide and Conquer** paradigm.
-
-#### Complexity:
-- **Time Complexity:** Best: \`O(1)\`, Worst: \`O(log n)\`
-- **Space Complexity:** Iterative: \`O(1)\`, Recursive: \`O(log n)\`
-
-#### C++ Implementation:
-\`\`\`cpp
-int binarySearch(const vector<int>& arr, int target) {
-    int low = 0, high = arr.size() - 1;
-    while (low <= high) {
-        int mid = low + (high - low) / 2;
-        if (arr[mid] == target) return mid;
-        if (arr[mid] < target) low = mid + 1;
-        else high = mid - 1;
-    }
-    return -1;
-}
-\`\`\``;
+#### 2. SOLID Design Principles
+- **S - Single Responsibility Principle:** A class should have one, and only one, reason to change.
+- **O - Open/Closed Principle:** Software entities should be open for extension, but closed for modification.
+- **L - Liskov Substitution Principle:** Derived classes must be substitutable for their base classes without breaking program correctness.
+- **I - Interface Segregation Principle:** Clients should not be forced to depend on interfaces they do not use.
+- **D - Dependency Inversion Principle:** Depend on abstractions (interfaces), not on concrete implementations.`;
   }
 
-  // 3. QuickSort vs MergeSort
-  if (query.includes('quicksort') || query.includes('mergesort') || query.includes('sort')) {
-    if (isHinglish) {
-      return `### ⚡ QuickSort vs MergeSort (Dono ka Comparison)
+  // 6. PLACEMENT & TECHNICAL INTERVIEW CHEATSHEET
+  if (query.includes('interview') || query.includes('placement') || query.includes('question') || query.includes('prep') || query.includes('job')) {
+    return `### 💼 Top 15 Technical Interview Questions for CSE Placements
 
-Dono algorithms **Divide and Conquer** approach use karte hain, par dono me kuch major differences hain:
+#### Core Technical Questions & Concise Answers:
+1. **What is the difference between Stack and Heap memory?**
+   - *Stack:* Fast, CPU-managed LIFO memory for local variables and function call frames. Fixed size, automatic cleanup.
+   - *Heap:* Slower dynamic runtime memory allocated manually via \`malloc\`/\`new\`. Requires manual \`free\`/\`delete\` to avoid memory leaks.
 
-| Feature | QuickSort | MergeSort |
-| :--- | :--- | :--- |
-| **Kaam karne ka tareeka** | Pivot choose karta hai aur elements ko pivot ke around partition karta hai | Array ko recursively do hisso me baantta hai, fir merge karta hai |
-| **Average Time** | O(n log n) | O(n log n) |
-| **Worst Time** | O(n²) *(agar pivot sabse chhota ya bada ho)* | O(n log n) *(guaranteed)* |
-| **Space Complexity** | O(log n) auxiliary stack space | O(n) extra space chahiye merge karne ke liye |
-| **In-place Sorting?** | Haan (array ke andar hi swap karta hai) | Nahi (extra array memory chahiye) |
-| **Stability** | Not Stable | Stable (equal elements ka order preserve rehta hai) |
+2. **What is a Memory Leak and how do you prevent it?**
+   - Occurs when dynamically allocated heap memory is no longer referenced but never freed. Prevented using RAII, smart pointers (\`std::unique_ptr\`, \`std::shared_ptr\`) in C++, or garbage collection.
 
-#### Kaunsa kab use kare?
-- **QuickSort:** In-memory arrays ke liye best hai kyunki ye cache-friendly hai aur extra RAM nahi mangta.
-- **MergeSort:** Linked Lists aur bohot bade data (jo RAM me fit na ho aur disk pe ho) ke liye best hai.`;
-    }
+3. **What is the difference between Primary Key and Unique Key?**
+   - Primary Key uniquely identifies a record and **never** permits NULLs (only 1 per table).
+   - Unique Key prevents duplicate entries but permits a single NULL value (multiple allowed per table).
 
-    return `### ⚡ QuickSort vs MergeSort Comparison
+4. **What is a Semaphore vs a Mutex?**
+   - Mutex is a locking mechanism with ownership (only owner can unlock).
+   - Semaphore is a signaling mechanism (counter \`>= 0\`) without ownership; any thread can signal.
 
-Both algorithms employ **Divide and Conquer**, but vary in memory and partitioning strategy:
+5. **Explain Database Normalization:**
+   - Eliminates insertion, update, and deletion anomalies by decomposing tables: 1NF (atomic values), 2NF (no partial dependencies), 3NF (no transitive dependencies), BCNF (every determinant is super key).
 
-| Metric | QuickSort | MergeSort |
-| :--- | :--- | :--- |
-| **Average Time** | O(n log n) | O(n log n) |
-| **Worst Time** | O(n²) | O(n log n) |
-| **Auxiliary Space**| O(log n) stack | O(n) heap memory |
-| **Stability** | Unstable | Stable |
-| **Optimal For** | In-memory arrays | Linked Lists & External Sorting |`;
+6. **What is the difference between TCP and UDP?**
+   - TCP is connection-oriented, reliable, and sequenced (HTTP, SSH).
+   - UDP is connectionless, fast, and does not guarantee delivery (DNS, VoIP, video streaming).
+
+7. **How does Hashing achieve O(1) average lookup time?**
+   - A hash function computes an array index from a key. Collisions are handled via Chaining (linked lists) or Open Addressing (probing).
+
+8. **What is Virtual Memory?**
+   - Memory management technique providing an illusion of large continuous RAM by swapping pages between physical RAM and disk storage.
+
+9. **What are the 4 conditions for Deadlock?**
+   - Mutual Exclusion, Hold and Wait, No Preemption, and Circular Wait.
+
+10. **Explain Overloading vs Overriding:**
+    - Overloading: Same function name, different parameter signature in same scope (Compile-Time).
+    - Overriding: Child class redefines a base class virtual method with identical signature (Run-Time).`;
   }
 
-  // 4. Deadlock in OS
-  if (query.includes('deadlock') || query.includes('operating system') || query.includes('os')) {
-    if (isHinglish) {
-      return `### 🔒 Operating Systems me Deadlock kya hota hai?
+  // 7. WEB & REST APIS
+  if (query.includes('rest') || query.includes('api') || query.includes('web') || query.includes('http')) {
+    return `### 🌐 REST APIs & Client-Server Web Architecture
 
-**Deadlock** ka simple matlab hai: "Aap meri cheez chhod nahi rahe, aur mai aapki cheez maang raha hu — dono aage nahi badh sakte!"
+#### 1. Core Principles of REST:
+- **Stateless:** Each request carries all context necessary for processing. No server-side session dependencies.
+- **Client-Server Decoupling:** Frontend and backend evolve independently.
+- **Uniform Interface:** Standard HTTP methods (\`GET\`, \`POST\`, \`PUT\`, \`PATCH\`, \`DELETE\`).
 
-Computer me: Jab Process 1 ke paas Resource A hai aur wo Resource B chahta hai, aur Process 2 ke paas Resource B hai aur wo Resource A chahta hai. Dono ek doosre ka wait karte rehte hain aur system freeze ho jata hai.
+#### 2. Express.js REST API Implementation:
+\`\`\`javascript
+const express = require('express');
+const app = express();
+app.use(express.json());
 
-#### 4 Necessary Conditions (Coffman Conditions):
-Agar ye chaaro conditions ek sath honge, tabhi deadlock hoga:
-1. **Mutual Exclusion:** Resource non-shareable hai (ek time pe ek hi process use kar sakta hai, jaise Printer).
-2. **Hold and Wait:** Process ek resource pakad ke baitha hai aur dusre ka wait kar raha hai.
-3. **No Preemption:** Kisi process se zabardasti resource chheen nahi sakte; wo khud release karega.
-4. **Circular Wait:** Ek circular loop ban jaye: P1 waits for P2, P2 waits for P3, aur P3 waits for P1.
+// In-memory data store
+let students = [
+  { id: 1, name: 'Piyush Raj', branch: 'CSE' }
+];
 
-#### Deadlock kaise solve karte hain?
-- **Deadlock Prevention:** In 4 conditions me se kisi ek ko tod do.
-- **Deadlock Avoidance:** Banker's Algorithm use karke safe state check karo.
-- **Deadlock Detection & Recovery:** Resource Allocation Graph (RAG) me cycle check karo aur process kill karo.`;
-    }
+// GET: Retrieve all records
+app.get('/api/students', (req, res) => {
+  res.status(200).json(students);
+});
 
-    return `### 🔒 Deadlocks in Operating Systems
+// POST: Create a new record
+app.post('/api/students', (req, res) => {
+  const { name, branch } = req.body;
+  if (!name || !branch) {
+    return res.status(400).json({ error: 'Name and branch are required.' });
+  }
+  const newStudent = { id: students.length + 1, name, branch };
+  students.push(newStudent);
+  res.status(201).json(newStudent);
+});
 
-A deadlock happens when processes are indefinitely blocked because each holds a resource while awaiting another held by another process.
+app.listen(3000, () => console.log('Server running on port 3000'));
+\`\`\`
 
-#### 4 Coffman Conditions:
-1. **Mutual Exclusion:** At least one resource is non-shareable.
-2. **Hold and Wait:** Process holds one resource while requesting another.
-3. **No Preemption:** Resources cannot be forcibly revoked.
-4. **Circular Wait:** A closed dependency loop of processes and resources exists.`;
+#### 3. Standard HTTP Status Code Reference:
+- \`200 OK\`: Standard successful response.
+- \`201 Created\`: Resource successfully created.
+- \`400 Bad Request\`: Malformed client syntax/payload.
+- \`401 Unauthorized\`: Missing authentication token/credentials.
+- \`403 Forbidden\`: Authenticated client lacks permissions.
+- \`404 Not Found\`: Target resource does not exist.
+- \`500 Internal Server Error\`: Unhandled backend exception.`;
   }
 
-  // 5. ACID Properties in DBMS
-  if (query.includes('acid') || query.includes('dbms') || query.includes('transaction')) {
-    if (isHinglish) {
-      return `### 🗄️ DBMS me ACID Properties Kya Hain?
+  // General Fallback formatted as structured CS study note
+  return `### 💻 DevPilot CS Study Hub
 
-Jab bhi database me koi transaction hoti hai (jaise Google Pay se ₹500 transfer karna), tab **ACID properties** ensure karti hain ki paisa gayab na ho!
+Topic Searched: **"${prompt}"**
 
-#### 1. Atomicity ("Ya toh pura hoga, ya kuch nahi")
-- Transaction ke saare operations complete hone chahiye. Agar beech me light chali jaye ya server crash ho jaye, toh pura rollback ho jayega.
-- *Example:* Mere account se ₹500 kate par dost ke paas nahi pahuche, toh Atomicity mere ₹500 wapas account me daal degi!
+#### Key Engineering Analysis:
+1. **Core Definition:**
+   Every technical system is defined by its computational trade-offs, architecture patterns, and reliability guarantees.
+2. **Key Metrics to Evaluate:**
+   - **Time Complexity:** Computational work growth rate (\`O(1)\` to \`O(n!)\`).
+   - **Space Complexity:** Auxiliary memory allocations required by call stacks and data buffers.
+   - **Fault Tolerance:** How the component behaves during network partitions or process crashes.
 
-#### 2. Consistency
-- Transaction se pehle aur transaction ke baad database ke rules/constraints valid rehne chahiye.
-- *Example:* Mere account me ₹500 kate aur dost ko ₹500 mile, toh total balance system me barabar raha.
+#### Recommended Core Study Areas:
+- 🌲 **Data Structures:** Arrays, Trees, Graphs, Hash Tables, Heaps.
+- ⚙️ **Operating Systems:** CPU Scheduling, Deadlocks, Paging, Semaphores.
+- 🗄️ **DBMS:** Normalization 1NF-BCNF, ACID Transactions, SQL Joins.
+- 🌐 **Computer Networks:** OSI 7 Layers, TCP 3-Way Handshake, DNS Resolution.
+- 💼 **Interview Preparation:** 15 Most Common Placement Concepts.
 
-#### 3. Isolation
-- Agar 10 log ek sath paise bhej rahe hain, toh ek doosre ke transaction me koi gadbad nahi hogi. Har transaction alag execute hoti hai.
-
-#### 4. Durability
-- Ek baar transaction successful ho gaya aur "Success" likha aa gaya, toh chahe server restart ho jaye, data permanently disk pe save ho chuka hai.`;
-    }
-
-    return `### 🗄️ DBMS ACID Properties
-
-- **Atomicity:** All operations succeed or none do (rollback on failure).
-- **Consistency:** Database transitions between valid states preserving schema constraints.
-- **Isolation:** Concurrent transactions run without interference.
-- **Durability:** Committed transactions survive system restarts via non-volatile logging.`;
-  }
-
-  // 6. 2nd Year Interview Prep
-  if (query.includes('interview') || query.includes('taiyari') || query.includes('prep') || query.includes('placement')) {
-    if (isHinglish) {
-      return `### 🎯 2nd Year CSE ke Top 5 Technical Interview Questions
-
-Bhai, college placements aur internship interviews me ye 5 sawal sabse zyada puchte hain:
-
-#### 1. Array vs Linked List me kya farak hai?
-- **Array:** Continuous memory hoti hai, isiliye kisi bhi index pe \`O(1)\` me pahuch sakte ho. Par size fixed hota hai.
-- **Linked List:** Alag-alag jagah memory hoti hai jo pointers se judi hoti hai. Insert/delete fast hota hai, par traverse \`O(n)\` lagta hai.
-
-#### 2. Stack aur Heap memory me kya antar hai?
-- **Stack:** Bohot fast hoti hai, function call aur local variables yahan store hote hain. CPU khud allocate/deallocate karta hai.
-- **Heap:** Dynamic memory hoti hai jo \`malloc()\` ya \`new\` keyword se banti hai. Developer ko manually free karni padti hai, warna memory leak ho jata hai.
-
-#### 3. TCP aur UDP me kaunsa fast hai?
-- **TCP:** Reliable hai, handshake karta hai, guarantee deta hai ki packet पहुंचेga (used in HTTP, Web, Banking).
-- **UDP:** Fast aur lightweight hai, packet loss ka parwah nahi karta (used in Live Streaming, Online Gaming, Voice calls).
-
-#### 4. Primary Key vs Unique Key:
-- Primary key table me sirf 1 ho sakti hai aur NULL value allow nahi karti.
-- Unique key multiple ho sakti hain aur 1 NULL value allow karti hai.
-
-#### 5. OOPs ke 4 Pillars:
-- **Encapsulation:** Data ko methods ke andar bandhna (private variables).
-- **Abstraction:** Complex code chupana aur simple interface dikhana.
-- **Inheritance:** Code reuse karna parent class se child class me.
-- **Polymorphism:** Ek function ke alag-alag roop (Method Overloading & Overriding).`;
-    }
-
-    return `### 🎯 Top 5 Technical Interview Questions for CSE
-1. **Array vs Linked List:** Contiguous O(1) random access vs dynamic non-contiguous pointer nodes.
-2. **Stack vs Heap:** CPU-managed automatic function memory vs manually allocated dynamic heap space.
-3. **TCP vs UDP:** Reliable connection-oriented 3-way handshake vs fast connectionless streaming.
-4. **Primary Key vs Unique Key:** Single NOT NULL constraint vs multiple permissible single-NULL columns.
-5. **OOP 4 Pillars:** Encapsulation, Abstraction, Inheritance, and Polymorphism.`;
-  }
-
-  // Fallback for general queries in Hinglish vs English
-  if (isHinglish) {
-    return `### 💻 DevPilot Assistant (Hinglish Support)
-
-Bhai, aapne pucha: **"${prompt}"**
-
-DevPilot aapki help ke liye ready hai! Aap mujhse Computer Science aur Coding ke baare me kuch bhi pooch sakte ho:
-- 📌 **DSA:** Binary Search, Sorting, Linked Lists, Trees, Graphs
-- 🌐 **Web & Backend:** REST APIs, Node.js, Express, HTTP Status Codes
-- 🗄️ **Core Subjects:** Operating Systems, DBMS Normalization, Computer Networks
-- 💼 **Interview Prep:** Coding questions, Placements tips, Big-O Complexity
-
-Bas prompt type karo ya sidebar se koi topic choose karo!`;
-  }
-
-  return `### 💻 DevPilot CS Assistant
-
-You asked: **"${prompt}"**
-
-DevPilot is ready to assist you! You can ask questions in **English**, **Hinglish** (e.g. *"bhai REST API samjha do"*), or any language across:
-- **Data Structures & Algorithms:** Arrays, Binary Search, Trees, Graphs, Sorting
-- **Web Development & Architecture:** REST APIs, HTTP protocols, Express.js, Async JS
-- **Core Subjects:** OS Deadlocks, DBMS ACID & Normalization, Networking
-- **Interview Preparation:** Technical questions, Big-O Complexity, Best practices`;
+*(Select any topic from the top pills or sidebar to view the full revision guide!)*`;
 }
 
 // ==============================================================================
@@ -368,13 +394,13 @@ app.post('/api/chat', async (req, res) => {
 
     const latestMessage = messages[messages.length - 1].content || '';
 
-    // If live Claude API key is configured, use Claude with multilingual instructions
+    // If live Claude API key is configured, use Claude with strict CSE professor instructions
     if (anthropic) {
       try {
         const response = await anthropic.messages.create({
           model: 'claude-3-5-haiku-20241022',
-          max_tokens: 1024,
-          system: "You are DevPilot, a technical Computer Science assistant developed by Piyush Raj, a 2nd-year CSE student. You are completely multilingual and support ALL languages, including Hinglish (Hindi written in Roman script like 'bhai binary search samjha do'), Hindi, English, and others. Always match the user's language and style naturally. When user asks in Hinglish, respond in natural, friendly, articulate Hinglish with clear English technical terms and syntax-highlighted code blocks.",
+          max_tokens: 1500,
+          system: "You are DevPilot, the ultimate Computer Science & Engineering study platform created by Piyush Raj, a 2nd-year CSE student. Deliver high-yield, structured, exam-grade notes for Computer Science topics. Every response MUST include: (1) Core definition, (2) Clean Markdown tables or ASCII flow diagrams, (3) Precise Time & Space complexity analysis, (4) Production-quality C++, Java, or Python code with edge case handling, and (5) Placement interview tips. Use professional, clear English without filler.",
           messages: messages,
         });
         return res.json({ reply: response.content[0].text });
@@ -384,7 +410,7 @@ app.post('/api/chat', async (req, res) => {
     }
 
     // High quality intelligent response engine
-    const reply = getKnowledgeBaseResponse(latestMessage);
+    const reply = getStudyNotes(latestMessage);
     res.json({ reply: reply });
 
   } catch (error) {

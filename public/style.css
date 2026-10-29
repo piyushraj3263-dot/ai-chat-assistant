@@ -325,24 +325,32 @@ body {
   gap: 12px;
 }
 
-.status-chip {
+.subject-pills {
   display: flex;
-  align-items: center;
   gap: 6px;
-  font-size: 0.75rem;
-  color: #10b981;
-  background: rgba(16, 185, 129, 0.1);
-  border: 1px solid rgba(16, 185, 129, 0.25);
-  padding: 4px 10px;
-  border-radius: 12px;
+  background: #121622;
+  border: 1px solid var(--border-subtle);
+  padding: 3px;
+  border-radius: var(--radius-md);
 }
 
-.status-pulse {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: #10b981;
-  box-shadow: 0 0 6px #10b981;
+.pill {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  padding: 4px 10px;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.pill:hover {
+  color: var(--text-main);
+}
+
+.pill.active {
+  background: var(--accent-blue);
+  color: #fff;
 }
 
 .icon-btn {
@@ -562,6 +570,43 @@ body {
 }
 
 /* Code Snippets & Syntax Styling */
+.message-bubble h3 {
+  font-size: 1.15rem;
+  color: #38bdf8;
+  margin: 12px 0 6px;
+  border-bottom: 1px solid var(--border-subtle);
+  padding-bottom: 4px;
+}
+
+.message-bubble h4 {
+  font-size: 0.98rem;
+  color: #f1f5f9;
+  margin: 10px 0 4px;
+}
+
+.message-bubble table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 12px 0;
+  font-size: 0.86rem;
+}
+
+.message-bubble th, .message-bubble td {
+  border: 1px solid var(--border-subtle);
+  padding: 8px 12px;
+  text-align: left;
+}
+
+.message-bubble th {
+  background-color: #171f30;
+  color: #38bdf8;
+  font-weight: 600;
+}
+
+.message-bubble tr:nth-child(even) {
+  background-color: rgba(255, 255, 255, 0.02);
+}
+
 .message-bubble code {
   font-family: 'JetBrains Mono', monospace;
   background: #0f131d;
