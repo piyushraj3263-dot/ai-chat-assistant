@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OmniChat AI - Personal AI Assistant</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <!-- Lucide icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+</head>
+<body>
+  <div class="app-container">
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <div class="logo">
+          <i data-lucide="bot" class="logo-icon"></i>
+          <span class="logo-text">OmniChat <span>AI</span></span>
+        </div>
+        <button class="new-chat-btn" id="newChatBtn">
+          <i data-lucide="plus"></i>
+          <span>New Chat</span>
+        </button>
+      </div>
+
+      <div class="sidebar-section">
+        <h3>Quick Prompts</h3>
+        <div class="quick-prompts">
+          <button class="prompt-chip" data-prompt="Explain how REST APIs work with a real-life analogy.">
+            <i data-lucide="network"></i> How REST APIs work
+          </button>
+          <button class="prompt-chip" data-prompt="What is Time & Space complexity in Big-O notation? Give simple examples.">
+            <i data-lucide="calculator"></i> Big-O Complexity
+          </button>
+          <button class="prompt-chip" data-prompt="Give me 5 common technical interview questions for a 2nd year CS student with answers.">
+            <i data-lucide="briefcase"></i> Interview prep questions
+          </button>
+          <button class="prompt-chip" data-prompt="How do Large Language Models (LLMs) and transformer architecture work simply?">
+            <i data-lucide="brain-circuit"></i> How LLMs work
+          </button>
+        </div>
+      </div>
+
+      <div class="sidebar-footer">
+        <div class="status-indicator">
+          <span class="status-dot"></span>
+          <span>Claude 3.5 Haiku</span>
+        </div>
+        <div class="repo-link">
+          <i data-lucide="github"></i>
+          <span>CSE Portfolio Project</span>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Chat Area -->
+    <main class="chat-main">
+      <!-- Chat Header -->
+      <header class="chat-header">
+        <button class="menu-toggle" id="menuToggle" aria-label="Toggle Menu">
+          <i data-lucide="menu"></i>
+        </button>
+        <div class="header-info">
+          <h2>OmniChat AI Assistant</h2>
+          <p class="subtitle">Powered by Anthropic Claude API</p>
+        </div>
+        <div class="header-actions">
+          <button class="clear-btn" id="clearChatBtn" title="Clear chat history">
+            <i data-lucide="trash-2"></i>
+          </button>
+        </div>
+      </header>
+
+      <!-- Messages Stream -->
+      <div class="messages-container" id="messagesContainer">
+        <!-- Welcome banner -->
+        <div class="welcome-screen" id="welcomeScreen">
+          <div class="welcome-avatar">
+            <i data-lucide="sparkles"></i>
+          </div>
+          <h1>What can I help you with today?</h1>
+          <p>Ask anything about coding, algorithms, computer science, or general topics.</p>
+
+          <div class="features-grid">
+            <div class="feature-card">
+              <i data-lucide="code-2"></i>
+              <h4>Code & Debug</h4>
+              <p>Write, explain, and debug code in any language</p>
+            </div>
+            <div class="feature-card">
+              <i data-lucide="graduation-cap"></i>
+              <h4>Learn Concepts</h4>
+              <p>Master Data Structures, OS, DBMS, & Networks</p>
+            </div>
+            <div class="feature-card">
+              <i data-lucide="lightbulb"></i>
+              <h4>Project Ideas</h4>
+              <p>Brainstorm new features and architecture</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Input Area -->
+      <div class="input-area">
+        <div class="input-wrapper">
+          <textarea
+            id="userInput"
+            placeholder="Type your message here... (Press Enter to send, Shift+Enter for new line)"
+            rows="1"
+          ></textarea>
+          <button id="sendBtn" class="send-btn" aria-label="Send Message" disabled>
+            <i data-lucide="send"></i>
+          </button>
+        </div>
+        <p class="disclaimer">
+          OmniChat uses Claude AI API. Always verify important technical information.
+        </p>
+      </div>
+    </main>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
