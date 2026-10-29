@@ -1,13 +1,13 @@
 // ==============================================================================
-// 💬 OmniChat AI - Client-Side Logic
+// 🛠️ DevPilot - Client Workspace Logic
+// Built by Piyush Raj
 // ==============================================================================
 
-// State: maintains conversation history to send to Claude for context!
-// Every time a new turn happens, we push { role: 'user' | 'assistant', content: text }
+// Session memory state
 let conversationHistory = [];
 let isWaitingForResponse = false;
 
-// DOM Elements
+// DOM references
 const messagesContainer = document.getElementById('messagesContainer');
 const welcomeScreen = document.getElementById('welcomeScreen');
 const userInput = document.getElementById('userInput');
@@ -15,25 +15,25 @@ const sendBtn = document.getElementById('sendBtn');
 const clearChatBtn = document.getElementById('clearChatBtn');
 const newChatBtn = document.getElementById('newChatBtn');
 const promptChips = document.querySelectorAll('.prompt-chip');
+const topicBoxes = document.querySelectorAll('.topic-box');
 const menuToggle = document.getElementById('menuToggle');
 const sidebar = document.getElementById('sidebar');
 
-// Initialize Lucide icons on load
+// Initialize Lucide icons
 document.addEventListener('DOMContentLoaded', () => {
   if (window.lucide) {
     lucide.createIcons();
   }
 });
 
-// Auto-expand textarea as user types
+// Auto-expand input textarea
 userInput.addEventListener('input', () => {
   userInput.style.height = 'auto';
-  userInput.style.height = Math.min(userInput.scrollHeight, 180) + 'px';
-  // Enable or disable send button based on trimmed input
+  userInput.style.height = Math.min(userInput.scrollHeight, 160) + 'px';
   sendBtn.disabled = userInput.value.trim().length === 0 || isWaitingForResponse;
 });
 
-// Handle Enter to send (Shift+Enter for newline)
+// Enter key sends, Shift+Enter adds newline
 userInput.addEventListener('keydown', (e) => {
   if (e.key === 'Enter' && !e.shiftKey) {
     e.preventDefault();
@@ -41,75 +41,99 @@ userInput.addEventListener('keydown', (e) => {
   }
 });
 
-// Send button click
+// Click send
 sendBtn.addEventListener('click', handleSendMessage);
 
-// Quick prompts in sidebar
+// Sidebar quick prompts
 promptChips.forEach((chip) => {
   chip.addEventListener('click', () => {
     const promptText = chip.getAttribute('data-prompt');
     if (promptText && !isWaitingForResponse) {
-      userInput.value = promptText;
-      userInput.style.height = 'auto';
-      userInput.style.height = Math.min(userInput.scrollHeight, 180) + 'px';
-      sendBtn.disabled = false;
-      handleSendMessage();
+      triggerPrompt(promptText);
     }
   });
 });
 
-// Clear chat button
-clearChatBtn.addEventListener('click', resetChat);
-newChatBtn.addEventListener('click', resetChat);
+// Welcome screen topic boxes
+topicBoxes.forEach((box) => {
+  box.addEventListener('click', () => {
+    const promptText = box.getAttribute('data-prompt');
+    if (promptText && !isWaitingForResponse) {
+      triggerPrompt(promptText);
+    }
+  });
+});
 
-// Mobile sidebar toggle
+function triggerPrompt(text) {
+  userInput.value = text;
+  userInput.style.height = 'auto';
+  userInput.style.height = Math.min(userInput.scrollHeight, 160) + 'px';
+  sendBtn.disabled = false;
+  handleSendMessage();
+}
+
+// Clear / New Session
+clearChatBtn.addEventListener('click', resetSession);
+newChatBtn.addEventListener('click', resetSession);
+
+// Mobile navigation toggle
 if (menuToggle) {
   menuToggle.addEventListener('click', () => {
     sidebar.classList.toggle('open');
   });
 }
 
-// Reset conversation
-function resetChat() {
+function resetSession() {
   if (isWaitingForResponse) return;
   conversationHistory = [];
   messagesContainer.innerHTML = '';
   if (welcomeScreen) {
     messagesContainer.appendChild(welcomeScreen);
+    // Re-bind topic box listeners
+    document.querySelectorAll('.topic-box').forEach((box) => {
+      box.addEventListener('click', () => {
+        const promptText = box.getAttribute('data-prompt');
+        if (promptText && !isWaitingForResponse) {
+          triggerPrompt(promptText);
+        }
+      });
+    });
   }
   userInput.value = '';
   userInput.style.height = 'auto';
   sendBtn.disabled = true;
   userInput.focus();
+  if (window.lucide) {
+    lucide.createIcons();
+  }
 }
 
 // ==============================================================================
-// 🚀 Main Send Message Flow
+// 📨 Message Dispatch
 // ==============================================================================
 async function handleSendMessage() {
   const text = userInput.value.trim();
   if (!text || isWaitingForResponse) return;
 
-  // 1. Hide welcome screen if it's visible
+  // Hide welcome banner if visible
   if (welcomeScreen && welcomeScreen.parentNode === messagesContainer) {
     messagesContainer.removeChild(welcomeScreen);
   }
 
-  // 2. Add user message to UI & history
+  // Append user message
   appendMessage('user', text);
   conversationHistory.push({ role: 'user', content: text });
 
-  // 3. Clear the input
+  // Reset input box
   userInput.value = '';
   userInput.style.height = 'auto';
   sendBtn.disabled = true;
   isWaitingForResponse = true;
 
-  // 4. Show typing indicator
+  // Show live typing dots
   const typingElement = showTypingIndicator();
 
   try {
-    // 5. Send POST request to backend server
     const response = await fetch('/api/chat', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -117,27 +141,22 @@ async function handleSendMessage() {
     });
 
     const data = await response.json();
-
-    // Remove typing indicator
     typingElement.remove();
 
     if (!response.ok) {
-      throw new Error(data.error || 'Failed to get a response from the server.');
+      throw new Error(data.error || 'Server returned an error.');
     }
 
-    // 6. Display AI assistant response
-    const botReply = data.reply || 'No response received.';
-    appendMessage('bot', botReply);
-
-    // Save assistant reply to memory so the AI remembers past conversation
-    conversationHistory.push({ role: 'assistant', content: botReply });
+    const reply = data.reply || 'No response returned.';
+    appendMessage('bot', reply);
+    conversationHistory.push({ role: 'assistant', content: reply });
 
   } catch (err) {
     typingElement.remove();
-    console.error('Chat error:', err);
+    console.error('Request error:', err);
     appendMessage(
       'bot',
-      `⚠️ **Error:** ${err.message || 'Something went wrong. Please check if your server is running and your API key is valid.'}`
+      `⚠️ **Connection Notice:** Could not reach the service (${err.message}). Please check your connection.`
     );
   } finally {
     isWaitingForResponse = false;
@@ -147,9 +166,8 @@ async function handleSendMessage() {
 }
 
 // ==============================================================================
-// 🎨 UI Helpers: Render Messages
+// 🎨 UI Rendering Helpers
 // ==============================================================================
-
 function appendMessage(sender, text) {
   const row = document.createElement('div');
   row.className = `message-row ${sender}`;
@@ -157,8 +175,8 @@ function appendMessage(sender, text) {
   const avatar = document.createElement('div');
   avatar.className = `avatar ${sender}-avatar`;
   avatar.innerHTML = sender === 'user'
-    ? '<i data-lucide="user"></i>'
-    : '<i data-lucide="bot"></i>';
+    ? 'PR'
+    : '<i data-lucide="terminal"></i>';
 
   const bubble = document.createElement('div');
   bubble.className = 'message-bubble';
@@ -186,7 +204,7 @@ function showTypingIndicator() {
 
   const avatar = document.createElement('div');
   avatar.className = 'avatar bot-avatar';
-  avatar.innerHTML = '<i data-lucide="bot"></i>';
+  avatar.innerHTML = '<i data-lucide="terminal"></i>';
 
   const bubble = document.createElement('div');
   bubble.className = 'message-bubble';
@@ -214,25 +232,28 @@ function scrollToBottom() {
   messagesContainer.scrollTop = messagesContainer.scrollHeight;
 }
 
-// Lightweight Markdown Formatter (code blocks, bold, lists, inline code)
+// Markdown formatting for code, bold, lists
 function formatMarkdown(text) {
   let escaped = text
     .replace(/&/g, '&amp;')
     .replace(/</g, '&lt;')
     .replace(/>/g, '&gt;');
 
-  // Code blocks: ```language ... ```
+  // Fenced code blocks
   escaped = escaped.replace(/```([a-zA-Z0-9_-]*)\n([\s\S]*?)```/g, (match, lang, code) => {
     return `<pre><code>${code.trim()}</code></pre>`;
   });
 
-  // Inline code: `code`
+  // Inline code
   escaped = escaped.replace(/`([^`]+)`/g, '<code>$1</code>');
 
-  // Bold text: **bold**
+  // Bold
   escaped = escaped.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
 
-  // Line breaks to <br>
+  // Bullet points
+  escaped = escaped.replace(/^\s*[-*]\s+(.*)$/gm, '&bull; $1');
+
+  // Newlines
   escaped = escaped.replace(/\n/g, '<br>');
 
   return escaped;

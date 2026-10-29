@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>OmniChat AI - Personal AI Assistant</title>
+  <title>DevPilot — CS & Developer Assistant by Piyush Raj</title>
   <link rel="stylesheet" href="style.css">
-  <!-- Google Fonts: Inter -->
+  <!-- Google Fonts: Inter & JetBrains Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <!-- Lucide icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
 </head>
@@ -17,89 +17,128 @@
     <!-- Sidebar -->
     <aside class="sidebar" id="sidebar">
       <div class="sidebar-header">
-        <div class="logo">
-          <i data-lucide="bot" class="logo-icon"></i>
-          <span class="logo-text">OmniChat <span>AI</span></span>
+        <div class="brand">
+          <div class="brand-icon">
+            <i data-lucide="terminal"></i>
+          </div>
+          <div class="brand-text">
+            <h2>DevPilot</h2>
+            <span class="badge">v1.0</span>
+          </div>
         </div>
         <button class="new-chat-btn" id="newChatBtn">
           <i data-lucide="plus"></i>
-          <span>New Chat</span>
+          <span>New Session</span>
         </button>
       </div>
 
       <div class="sidebar-section">
-        <h3>Quick Prompts</h3>
+        <h3>Core CS Topics</h3>
         <div class="quick-prompts">
-          <button class="prompt-chip" data-prompt="Explain how REST APIs work with a real-life analogy.">
-            <i data-lucide="network"></i> How REST APIs work
+          <button class="prompt-chip" data-prompt="Explain how REST APIs work with a client-server architecture example.">
+            <i data-lucide="globe"></i> REST APIs & Architecture
           </button>
-          <button class="prompt-chip" data-prompt="What is Time & Space complexity in Big-O notation? Give simple examples.">
-            <i data-lucide="calculator"></i> Big-O Complexity
+          <button class="prompt-chip" data-prompt="Compare QuickSort and MergeSort: time complexity, space complexity, and best use cases.">
+            <i data-lucide="arrow-up-down"></i> QuickSort vs MergeSort
           </button>
-          <button class="prompt-chip" data-prompt="Give me 5 common technical interview questions for a 2nd year CS student with answers.">
-            <i data-lucide="briefcase"></i> Interview prep questions
+          <button class="prompt-chip" data-prompt="Explain the 4 ACID properties in DBMS with real database transaction examples.">
+            <i data-lucide="database"></i> DBMS ACID Properties
           </button>
-          <button class="prompt-chip" data-prompt="How do Large Language Models (LLMs) and transformer architecture work simply?">
-            <i data-lucide="brain-circuit"></i> How LLMs work
+          <button class="prompt-chip" data-prompt="What are the 4 conditions required for a Deadlock in Operating Systems?">
+            <i data-lucide="cpu"></i> OS Deadlock Conditions
+          </button>
+          <button class="prompt-chip" data-prompt="Explain the 4 pillars of OOP with short C++ or Java code examples.">
+            <i data-lucide="boxes"></i> OOP 4 Pillars
+          </button>
+          <button class="prompt-chip" data-prompt="Give me 5 essential technical interview questions for a 2nd year CS student.">
+            <i data-lucide="briefcase"></i> 2nd-Year Interview Prep
           </button>
         </div>
       </div>
 
       <div class="sidebar-footer">
-        <div class="status-indicator">
-          <span class="status-dot"></span>
-          <span>Online &bull; Claude API</span>
+        <div class="author-card">
+          <div class="author-avatar">PR</div>
+          <div class="author-info">
+            <strong>Piyush Raj</strong>
+            <span>2nd Year B.Tech CSE</span>
+          </div>
         </div>
-        <a href="https://github.com/piyushraj3263-dot" target="_blank" rel="noopener noreferrer" class="repo-link" style="text-decoration: none; color: inherit;">
+        <a href="https://github.com/piyushraj3263-dot/ai-chat-assistant" target="_blank" rel="noopener noreferrer" class="github-button">
           <i data-lucide="github"></i>
-          <span>Built by Piyush Raj</span>
+          <span>View Source on GitHub</span>
         </a>
       </div>
     </aside>
 
-    <!-- Main Chat Area -->
+    <!-- Main Chat Workspace -->
     <main class="chat-main">
-      <!-- Chat Header -->
+      <!-- Top Navigation Bar -->
       <header class="chat-header">
-        <button class="menu-toggle" id="menuToggle" aria-label="Toggle Menu">
-          <i data-lucide="menu"></i>
-        </button>
-        <div class="header-info">
-          <h2>OmniChat AI Assistant</h2>
-          <p class="subtitle">Powered by Anthropic Claude API</p>
+        <div class="header-left">
+          <button class="menu-toggle" id="menuToggle" aria-label="Toggle Navigation">
+            <i data-lucide="menu"></i>
+          </button>
+          <div class="header-title-group">
+            <h1>DevPilot <span class="tag">CS Assistant</span></h1>
+            <p>Built by Piyush Raj &bull; Interactive Knowledge & Code Assistant</p>
+          </div>
         </div>
-        <div class="header-actions">
-          <button class="clear-btn" id="clearChatBtn" title="Clear chat history">
-            <i data-lucide="trash-2"></i>
+        <div class="header-right">
+          <div class="status-chip">
+            <span class="status-pulse"></span>
+            <span>Ready</span>
+          </div>
+          <button class="icon-btn" id="clearChatBtn" title="Reset Session">
+            <i data-lucide="rotate-ccw"></i>
           </button>
         </div>
       </header>
 
       <!-- Messages Stream -->
       <div class="messages-container" id="messagesContainer">
-        <!-- Welcome banner -->
+        <!-- Welcome Screen -->
         <div class="welcome-screen" id="welcomeScreen">
-          <div class="welcome-avatar">
-            <i data-lucide="sparkles"></i>
+          <div class="welcome-badge">
+            <i data-lucide="code-2"></i>
+            <span>Computer Science & Coding Companion</span>
           </div>
-          <h1>What can I help you with today?</h1>
-          <p>Ask anything about coding, algorithms, computer science, or general topics.</p>
+          <h2>Welcome to DevPilot 👋</h2>
+          <p class="welcome-desc">
+            An interactive assistant I built to help review Data Structures, Operating Systems, DBMS, Web APIs, and interview problems.
+          </p>
 
-          <div class="features-grid">
-            <div class="feature-card">
-              <i data-lucide="code-2"></i>
-              <h4>Code & Debug</h4>
-              <p>Write, explain, and debug code in any language</p>
+          <div class="topic-grid">
+            <div class="topic-box" data-prompt="Explain how Big-O notation measures time and space complexity with simple code examples.">
+              <div class="topic-box-icon"><i data-lucide="gauge"></i></div>
+              <div class="topic-box-content">
+                <h4>Time & Space Complexity</h4>
+                <p>O(1), O(log n), O(n), O(n²) explained with practical code</p>
+              </div>
             </div>
-            <div class="feature-card">
-              <i data-lucide="graduation-cap"></i>
-              <h4>Learn Concepts</h4>
-              <p>Master Data Structures, OS, DBMS, & Networks</p>
+
+            <div class="topic-box" data-prompt="What is the difference between a Process and a Thread in Operating Systems?">
+              <div class="topic-box-icon"><i data-lucide="layers"></i></div>
+              <div class="topic-box-content">
+                <h4>Processes vs Threads</h4>
+                <p>Memory layout, context switching, and concurrency</p>
+              </div>
             </div>
-            <div class="feature-card">
-              <i data-lucide="lightbulb"></i>
-              <h4>Project Ideas</h4>
-              <p>Brainstorm new features and architecture</p>
+
+            <div class="topic-box" data-prompt="Explain Database Normalization: 1NF, 2NF, 3NF, and BCNF with examples.">
+              <div class="topic-box-icon"><i data-lucide="table"></i></div>
+              <div class="topic-box-content">
+                <h4>DBMS Normalization</h4>
+                <p>Anomalies, dependencies, and schema decomposition</p>
+              </div>
+            </div>
+
+            <div class="topic-box" data-prompt="Write a clean Binary Search implementation and explain why its complexity is O(log n).">
+              <div class="topic-box-icon"><i data-lucide="binary"></i></div>
+              <div class="topic-box-content">
+                <h4>Binary Search Algorithm</h4>
+                <p>Divide-and-conquer logic, edge cases, and code</p>
+              </div>
             </div>
           </div>
         </div>
@@ -107,19 +146,20 @@
 
       <!-- Input Area -->
       <div class="input-area">
-        <div class="input-wrapper">
+        <div class="input-card">
           <textarea
             id="userInput"
-            placeholder="Type your message here... (Press Enter to send, Shift+Enter for new line)"
+            placeholder="Ask a technical concept, paste code to review, or select a topic above..."
             rows="1"
           ></textarea>
-          <button id="sendBtn" class="send-btn" aria-label="Send Message" disabled>
-            <i data-lucide="send"></i>
+          <button id="sendBtn" class="send-action-btn" aria-label="Send Query" disabled>
+            <i data-lucide="arrow-up"></i>
           </button>
         </div>
-        <p class="disclaimer">
-          OmniChat uses Claude AI API. Always verify important technical information.
-        </p>
+        <div class="input-footer">
+          <span>DevPilot by Piyush Raj &bull; Computer Science Portfolio</span>
+          <span class="shortcut-hint">Press <strong>Enter</strong> to send, <strong>Shift+Enter</strong> for newline</span>
+        </div>
       </div>
     </main>
   </div>

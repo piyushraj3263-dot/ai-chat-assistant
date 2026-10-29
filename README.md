@@ -1,4 +1,4 @@
-# OmniChat — Full-Stack AI Chat Assistant 💬
+# DevPilot — Computer Science & Developer Workspace 🛠️
 
 [![Live Demo](https://img.shields.io/badge/Live%20Demo-Vercel-success?style=for-the-badge&logo=vercel)](https://ai-chat-assistant-gold.vercel.app)
 [![GitHub Repo](https://img.shields.io/badge/GitHub-Repository-blue?style=for-the-badge&logo=github)](https://github.com/piyushraj3263-dot/ai-chat-assistant)
@@ -10,7 +10,7 @@
 
 Hey there! 👋 I'm **Piyush Raj**, a 2nd-year Computer Science & Engineering student. 
 
-I built **OmniChat** to get hands-on experience with how modern web applications integrate with Large Language Model (LLM) APIs. Rather than just using ChatGPT or Claude through a browser, I wanted to understand what actually happens behind the scenes: how HTTP requests are structured, how backend servers securely proxy API keys, and how multi-turn conversation memory is maintained in the client.
+I built **DevPilot** to solve a real student problem: having a clean, fast, interactive assistant to revise core Computer Science subjects (Data Structures, Algorithms, Operating Systems, DBMS, and Web Architecture) while practicing full-stack development and API architecture.
 
 ---
 

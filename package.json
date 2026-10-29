@@ -1,7 +1,7 @@
 {
-  "name": "ai-chat-assistant",
+  "name": "devpilot-assistant",
   "version": "1.0.0",
-  "description": "AI-powered chat assistant built with Claude API",
+  "description": "DevPilot — Computer Science Knowledge & Developer Assistant built by Piyush Raj (B.Tech CSE)",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
